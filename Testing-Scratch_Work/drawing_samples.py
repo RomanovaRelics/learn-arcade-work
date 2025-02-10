@@ -67,7 +67,12 @@ arcade.draw_line(500, 550, 450, 600, arcade.csscolor.YELLOW)
 arcade.draw_line(500, 550, 450, 500, arcade.csscolor.YELLOW)
 
 # Draw text at (150, 230) with a font size of 24 pts.
-'Arbor Day - Plant a Tree!', 150, 230, arcade.csscolor.BLACK, 24
+"""
+PerformanceWarning: draw_text is an extremely slow function for displaying text. Consider using Text objects instead.
+#warnings.warn(message, warning_type), comes up with use of arcade.draw_text()
+"""
+arcade.draw_text("Arbor Day - Plant a Tree!", 150, 230, arcade.csscolor.BLACK, 24)
+
 # Finish drawing.
 arcade.finish_render()
 
