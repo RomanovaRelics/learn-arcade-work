@@ -53,7 +53,7 @@ arcade.draw_arc_filled( 500, 130, 190, 200, arcade.color.UNIVERSITY_OF_CALIFORNI
 #Nest hole
 arcade.draw_ellipse_filled( 500, 130, 190, 60, arcade.color.BISTRE_BROWN)
 
-#Egg 2
+#Egg
 arcade.draw_ellipse_filled(500, 130, 40, 50, arcade.color.BEIGE)
 
 # Finish drawing
