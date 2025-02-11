@@ -47,8 +47,14 @@ arcade.draw_circle_filled( 320, 310, 5, arcade.color.BLACK)
 #Beak
 arcade.draw_triangle_filled( 290, 280, 310, 280, 300, 260, arcade.color.SELECTIVE_YELLOW)
 
-#Nest
-arcade.draw_arc_filled( 500, 130, 180, 100, arcade.color.UNIVERSITY_OF_CALIFORNIA_GOLD, 180, 360)
+#Nest base
+arcade.draw_arc_filled( 500, 130, 190, 200, arcade.color.UNIVERSITY_OF_CALIFORNIA_GOLD, 180, 360)
+
+#Nest hole
+arcade.draw_ellipse_filled( 500, 130, 190, 60, arcade.color.BISTRE_BROWN)
+
+#Egg 2
+arcade.draw_ellipse_filled(500, 130, 40, 50, arcade.color.BEIGE)
 
 # Finish drawing
 arcade.finish_render()
