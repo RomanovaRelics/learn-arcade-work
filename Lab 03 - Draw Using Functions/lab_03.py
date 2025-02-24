@@ -13,7 +13,8 @@ SCREEN_HEIGHT = 600
 """Opens window"""
 arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
 
-"""Set background color. NOT WORKING"""
+"""Set background color"""
+#Background color STILL isn't working for some reason.
 arcade.set_background_color(arcade.color.SKY_BLUE)
 
 """Draw ground"""
