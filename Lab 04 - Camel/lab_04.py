@@ -127,10 +127,10 @@ manuscript and have failed your brothers.""")
             print("Your light is dangerously low.")
         if candlelight <= 0:
             print("""Your candle has gone out and in trying to relight it, ink
-            has spilled over all of your hard work. You are shamed for your clumsiness
-            in such a pressing time. Your brothers do not allow you to continue to help
-            with the manuscripts as they fear you will absentmindedly destroy all of the 
-            manuscript pages.""")
+has spilled over all of your hard work. You are shamed for your clumsiness
+in such a pressing time. Your brothers do not allow you to continue to help
+with the manuscripts as they fear you will absentmindedly destroy all of the 
+manuscript pages.""")
             break
 
         if work_completed > 4 and work_completed < 7:
@@ -141,15 +141,17 @@ manuscript and have failed your brothers.""")
             print("You are almost finished with your pages!")
         if work_completed >= 14 and hours_left <= 168:
             print("""You have completed your work on time and saved your scriptorium
-    from fading into obscurity! You and your brothers rejoice and continue the
-    art of manuscript making. Thank you for your diligent work and may the lord
-    see to it that you be reborn in paradise by the right hand of the father.""")
+from fading into obscurity! You and your brothers rejoice and continue the
+art of manuscript making. Thank you for your diligent work and may the lord
+see to it that you be reborn in paradise by the right hand of the father.""")
             break
-        if work_completed >= 14 and hours_left >= 168:
+        if hours_left <= 0 and work_completed < 14:
+            print()
             print("""You have not completed your designated work in time. While the 
-            efforts of you and your brothers were valiant, you could not compete
-             with the printing press. Your beloved scriptorium struggles and eventually
-             is forced to close down due to lack of funds.""")
+efforts of you and your brothers were valiant, you could not compete
+with the printing press. Your beloved scriptorium struggles and eventually
+is forced to close down due to lack of funds.""")
+            break
 
 
 main()
