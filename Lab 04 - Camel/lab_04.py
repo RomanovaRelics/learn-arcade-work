@@ -39,8 +39,8 @@ ward off sleep and darkness to save your scriptorium?""")
         elif answer == "A":
             print()
             print("You have created one page.")
-            energy = energy -6
-            candlelight = candlelight -6
+            energy = energy -5
+            candlelight = candlelight -5
             work_completed = work_completed +1
             hours_left = hours_left -10
         elif answer == "B":
@@ -119,9 +119,9 @@ your fellow monks look bad. You are no longer allowed to help with the
 manuscript and have failed your brothers.""")
             break
 
-        if candlelight > 5:
+        if candlelight >= 5:
             print("Your candle burns steadily.")
-        if candlelight <= 5 and candlelight > 2:
+        if candlelight < 5 and candlelight > 2:
             print("The light from your candle grows dim.")
         if candlelight <= 2 and candlelight >= 1:
             print("Your light is dangerously low.")
