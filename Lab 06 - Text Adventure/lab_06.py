@@ -10,10 +10,12 @@ class Room:
 
 def main():
     room_list = []
-    room = Room("You are standing on the porch.\n "
-                "You hear creaking coming from within the house. \n"
-                "Your friends stare at you from the sidewalk and \n"
-                "gesture wildly for you to go inside.", 1, None, None, None)
+    room = Room("You are standing on the porch.\n"
+                "You hear creaking coming from within the house.\n"
+                "Your friends stare at you from the sidewalk and\n"
+                "gesture wildly for you to go inside.\n"
+                " \n"
+                "You can go North into the house from here.", 1, None, None, None)
     room_list.append(room)
     room = Room("You enter the foyer. You turn on your flashlight\n"
                 "and look around. There is not much to see besides\n"
@@ -55,6 +57,52 @@ def main():
 
     current_room = 0
 
-    print(room_list[current_room])
+    done = False
 
+    while not done:
+        print()
+        print(room_list[current_room].description)
+        answer = input("What direction do you want to go in? ")
+        answer = answer.upper()
+
+        if answer == "N" or "NORTH":
+            print()
+            print("You went North.")
+            done = True
+            next_room = room_list[current_room].north
+            if next_room is None:
+                print("Something tells you that you can't go that way.")
+            else:
+                current_room = next_room
+
+
+        if answer == "E" or "EAST":
+            done = True
+            print()
+            print("You went East.")
+            next_room = room_list[current_room].east
+            if next_room is None:
+                print("Something tells you that you can't go that way.")
+            else:
+                current_room = next_room
+
+        if answer == "S" or "SOUTH":
+            done = True
+            print()
+            print("You went South.")
+            next_room = room_list[current_room].south
+            if next_room is None:
+                print("Something tells you that you can't go that way.")
+            else:
+                current_room = next_room
+
+        if answer == "W" or "WEST":
+            done = True
+            print()
+            print("You went West.")
+            next_room = room_list[current_room].west
+            if next_room is None:
+                print("Something tells you that you can't go that way.")
+            else:
+                current_room = next_room
 main()
