@@ -182,7 +182,9 @@ def main():
 
         elif ghost == True:
             print()
-            print("\nYou leave the ghost alone.")
+            print("\nYou decide you are not being paid enough to deal with an ACTUAL ghost. Come to think of it, you\n"
+                  "aren't getting paid at all... Maybe truth or dare needs to up its stakes and maybe you should just\n"
+                  "pretend you don't see it.")
 
         if room_list[current_room] == room_list[0] and visit_check >= 8:
             done = True
