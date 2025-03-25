@@ -36,3 +36,4 @@ monster_1.health = 12
 
 monster_1.decrease_health()
 monster_1.decrease_health()
+monster_1.decrease_health()
