@@ -10,13 +10,6 @@ import arcade
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-"""Opens window"""
-arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
-
-"""Set background color"""
-#Background color STILL isn't working for some reason.
-arcade.set_background_color(arcade.color.SKY_BLUE)
-
 """Draw ground"""
 def draw_grass():
     arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, SCREEN_HEIGHT / 3, 0, arcade.color.BITTER_LIME)
@@ -71,6 +64,9 @@ def draw_bush(x, y):
 
 """Define main function"""
 def main():
+    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
+    arcade.set_background_color(arcade.color.SKY_BLUE)
+    arcade.start_render()
     draw_grass()
     draw_bush(140, 295)
     draw_bush(650, 290)
@@ -79,12 +75,9 @@ def main():
     draw_chick(600, 160)
     draw_nest(100, 50)
     draw_bush(400, 250)
+    arcade.finish_render()
+    arcade.run()
 
 """Call main function"""
 main()
 
-# Finish drawing
-arcade.finish_render()
-
-# Keep the window up until someone closes it.
-arcade.run()
