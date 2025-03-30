@@ -57,6 +57,9 @@ class MyGame(arcade.Window):
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
 
+        self.chick1 = Chick()
+        self.chick2 = Chick()
+
     def on_draw(self):
         arcade.start_render()
         arcade.set_background_color(arcade.csscolor.SKY_BLUE)
@@ -106,41 +109,6 @@ class Chick:
         if self.y > SCREEN_HEIGHT - 200:
             self.change_y *= -1
 
-class Chick2:
-    """ This class manages a chick moving on the screen. """
-
-    def __init__(self, x, y, change_x, change_y):
-        """ Constructor. """
-
-        # Take the parameters of the init function above, and create instance variables out of them.
-        self.x = x
-        self.y = y
-        self.change_x = change_x
-        self.change_y = change_y
-
-    def draw(self):
-        """Draw chick 2"""
-        draw_chick2(400, 400)
-
-    def on_update(self, change_x, change_y):
-        """ Code to control the chick 1 movement. """
-
-        # Move the ball
-        self.y += self.change_y
-        self.x += self.change_x
-
-        # See if the ball hit the edge of the screen. If so, change direction
-        if self.x < self.radius:
-            self.change_x *= -1
-
-        if self.position_x > SCREEN_WIDTH - self.radius:
-            self.change_x *= -1
-
-        if self.position_y < self.radius:
-            self.change_y *= -1
-
-        if self.position_y > SCREEN_HEIGHT - self.radius:
-            self.change_y *= -1
 def main():
     window = MyGame()
     arcade.run()
