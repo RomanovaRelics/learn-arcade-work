@@ -24,8 +24,8 @@ def draw_bush(x, y):
     arcade.draw_circle_filled(x + 40, y + 20, 60, arcade.color.APPLE_GREEN)
     arcade.draw_ellipse_filled(x + 0, y + 20, 80, 150, arcade.color.ANDROID_GREEN)
 
-"""Draw chick 1"""
-def draw_chick1(x, y):
+"""Draw chick"""
+def draw_chick(x, y):
     """Chick body"""
     arcade.draw_ellipse_filled(x, y,120, 160, arcade.color.DANDELION)
     """Chick head"""
@@ -47,28 +47,6 @@ def draw_chick1(x, y):
     """Beak"""
     arcade.draw_triangle_filled(x - 10, y + 80, x + 0, y + 60, x + 10, y + 80, arcade.color.SELECTIVE_YELLOW)
 
-"""Draw chick 2"""
-def draw_chick2(x, y):
-    """Chick body"""
-    arcade.draw_ellipse_filled(x, y,120, 160, arcade.color.DANDELION)
-    """Chick head"""
-    arcade.draw_circle_filled(x, y + 100,50, arcade.color.CORN)
-    """Left Wing"""
-    arcade.draw_ellipse_filled(x - 70,y + 30, 40, 100, arcade.color.CORN, 45)
-    """Right Wing"""
-    arcade.draw_ellipse_filled(x + 70, y + 30, 40, 100, arcade.color.CORN, -45)
-    """Left foot"""
-    arcade.draw_triangle_filled(x - 50, y - 80, x - 15, y - 80, x - 35, y - 50, arcade.color.SELECTIVE_YELLOW)
-    """Right foot"""
-    arcade.draw_triangle_filled(x + 50, y - 80,x + 15, y - 80, x + 35,y - 50, arcade.color.SELECTIVE_YELLOW)
-    """Left Eye"""
-    arcade.draw_circle_filled(x - 20, y + 100,9, arcade.color.WHITE)
-    arcade.draw_circle_filled(x - 20, y + 100, 5, arcade.color.BLACK)
-    """Right eye"""
-    arcade.draw_circle_filled(x + 20, y + 100, 9, arcade.color.WHITE)
-    arcade.draw_circle_filled(x + 20, y + 100, 5, arcade.color.BLACK)
-    """Beak"""
-    arcade.draw_triangle_filled(x - 10, y + 80, x + 0, y + 60, x + 10, y + 80, arcade.color.SELECTIVE_YELLOW)
 
 class MyGame(arcade.Window):
     """ Our Custom Window Class"""
@@ -92,7 +70,7 @@ class MyGame(arcade.Window):
 
 
 
-class Chick1:
+class Chick:
     """ This class manages a chick moving on the screen. """
 
     def __init__(self, x, y, change_x, change_y):
@@ -106,7 +84,7 @@ class Chick1:
 
     def draw(self):
         """ Draw the chick 1 with the instance variables we have. """
-        draw_chick1(200, 200)
+        draw_chick(200, 200)
 
     def on_update(self, change_x, change_y):
         """ Code to control the chick 1 movement. """
