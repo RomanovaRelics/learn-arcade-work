@@ -5,6 +5,7 @@ import arcade
 # --- Constants ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+MOVEMENT_SPEED = 3
 
 """Draw Nest"""
 #I did the y + 30 on purpose to make it look center even though it is not technically the actual center but the visual center.
@@ -23,8 +24,31 @@ def draw_bush(x, y):
     arcade.draw_circle_filled(x + 40, y + 20, 60, arcade.color.APPLE_GREEN)
     arcade.draw_ellipse_filled(x + 0, y + 20, 80, 150, arcade.color.ANDROID_GREEN)
 
-"""Draw chick"""
-def draw_chick(x, y):
+"""Draw chick 1"""
+def draw_chick1(x, y):
+    """Chick body"""
+    arcade.draw_ellipse_filled(x, y,120, 160, arcade.color.DANDELION)
+    """Chick head"""
+    arcade.draw_circle_filled(x, y + 100,50, arcade.color.CORN)
+    """Left Wing"""
+    arcade.draw_ellipse_filled(x - 70,y + 30, 40, 100, arcade.color.CORN, 45)
+    """Right Wing"""
+    arcade.draw_ellipse_filled(x + 70, y + 30, 40, 100, arcade.color.CORN, -45)
+    """Left foot"""
+    arcade.draw_triangle_filled(x - 50, y - 80, x - 15, y - 80, x - 35, y - 50, arcade.color.SELECTIVE_YELLOW)
+    """Right foot"""
+    arcade.draw_triangle_filled(x + 50, y - 80,x + 15, y - 80, x + 35,y - 50, arcade.color.SELECTIVE_YELLOW)
+    """Left Eye"""
+    arcade.draw_circle_filled(x - 20, y + 100,9, arcade.color.WHITE)
+    arcade.draw_circle_filled(x - 20, y + 100, 5, arcade.color.BLACK)
+    """Right eye"""
+    arcade.draw_circle_filled(x + 20, y + 100, 9, arcade.color.WHITE)
+    arcade.draw_circle_filled(x + 20, y + 100, 5, arcade.color.BLACK)
+    """Beak"""
+    arcade.draw_triangle_filled(x - 10, y + 80, x + 0, y + 60, x + 10, y + 80, arcade.color.SELECTIVE_YELLOW)
+
+"""Draw chick 2"""
+def draw_chick2(x, y):
     """Chick body"""
     arcade.draw_ellipse_filled(x, y,120, 160, arcade.color.DANDELION)
     """Chick head"""
@@ -66,33 +90,69 @@ class MyGame(arcade.Window):
         draw_nest(100, 50)
         draw_bush(400, 250)
 
-class Chick:
+
+
+class Chick1:
     """ This class manages a chick moving on the screen. """
 
-    def __init__(self, position_x, position_y, change_x, change_y, radius, color):
+    def __init__(self, x, y, change_x, change_y):
         """ Constructor. """
 
         # Take the parameters of the init function above, and create instance variables out of them.
-        self.position_x = position_x
-        self.position_y = position_y
+        self.x = x
+        self.y = y
         self.change_x = change_x
         self.change_y = change_y
-        self.radius = radius
-        self.color = color
 
     def draw(self):
-        """ Draw the balls with the instance variables we have. """
-        draw_chick(self.position_x, self.position_y, self.radius, self.color)
+        """ Draw the chick 1 with the instance variables we have. """
+        draw_chick1(200, 200)
 
-    def on_update(self):
-        """ Code to control the ball's movement. """
+    def on_update(self, change_x, change_y):
+        """ Code to control the chick 1 movement. """
 
         # Move the ball
-        self.position_y += self.change_y
-        self.position_x += self.change_x
+        self.y += self.change_y
+        self.x += self.change_x
 
         # See if the ball hit the edge of the screen. If so, change direction
-        if self.position_x < self.radius:
+        if self.x < 400:
+            self.change_x *= -1
+
+        if self.x > SCREEN_WIDTH - 300:
+            self.change_x *= -1
+
+        if self.y < 500:
+            self.change_y *= -1
+
+        if self.y > SCREEN_HEIGHT - 200:
+            self.change_y *= -1
+
+class Chick2:
+    """ This class manages a chick moving on the screen. """
+
+    def __init__(self, x, y, change_x, change_y):
+        """ Constructor. """
+
+        # Take the parameters of the init function above, and create instance variables out of them.
+        self.x = x
+        self.y = y
+        self.change_x = change_x
+        self.change_y = change_y
+
+    def draw(self):
+        """Draw chick 2"""
+        draw_chick2(400, 400)
+
+    def on_update(self, change_x, change_y):
+        """ Code to control the chick 1 movement. """
+
+        # Move the ball
+        self.y += self.change_y
+        self.x += self.change_x
+
+        # See if the ball hit the edge of the screen. If so, change direction
+        if self.x < self.radius:
             self.change_x *= -1
 
         if self.position_x > SCREEN_WIDTH - self.radius:
@@ -103,8 +163,6 @@ class Chick:
 
         if self.position_y > SCREEN_HEIGHT - self.radius:
             self.change_y *= -1
-
-
 def main():
     window = MyGame()
     arcade.run()
