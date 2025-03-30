@@ -5,7 +5,6 @@ SCREEN_HEIGHT = 600
 MOVEMENT_SPEED = 3
 
 """Draw Nest"""
-#I did the y + 30 on purpose to make it look center even though it is not technically the actual center but the visual center.
 def draw_nest(x, y):
     """Nest base"""
     arcade.draw_arc_filled(x + 0, y + 30, 190, 200, arcade.color.UNIVERSITY_OF_CALIFORNIA_GOLD, 180, 360)
