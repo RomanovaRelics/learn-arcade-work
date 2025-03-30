@@ -1,8 +1,5 @@
-""" Lab 7 - User Control """
-
 import arcade
 
-# --- Constants ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 MOVEMENT_SPEED = 3
@@ -47,22 +44,62 @@ def draw_chick(x, y):
     """Beak"""
     arcade.draw_triangle_filled(x - 10, y + 80, x + 0, y + 60, x + 10, y + 80, arcade.color.SELECTIVE_YELLOW)
 
+class Chick:
+    def __init__(self, position_x, position_y):
+
+        # Take the parameters of the init function above,
+        # and create instance variables out of them.
+        self.position_x = position_x
+        self.position_y = position_y
+
+    change_x = 0
+    change_y = 0
+
+
+    def draw(self):
+        """ Draw the balls with the instance variables we have. """
+        draw_chick(self.position_x, self.position_y,)
+
+    def update(self):
+        # Move the chick
+        self.position_y += self.change_y
+        self.position_x += self.change_x
+
+        # See if the ball hit the edge of the screen. If so, change direction
+        if self.position_x < 80:
+            self.position_x = 80
+
+        if self.position_x > SCREEN_WIDTH - 70:
+            self.position_x = SCREEN_WIDTH - 70
+
+        if self.position_y < 80:
+            self.position_y = 80
+
+        if self.position_y > SCREEN_HEIGHT - 150:
+            self.position_y = SCREEN_HEIGHT - 150
+
 
 class MyGame(arcade.Window):
-    """ Our Custom Window Class"""
 
-    def __init__(self):
-        """ Initializer """
+    def __init__(self, width, height, title):
 
-        # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
+        # Call the parent class's init function
+        super().__init__(width, height, title)
 
-        self.chick1 = Chick()
-        self.chick2 = Chick()
+        # Make the mouse disappear when it is over the window.
+        # So we just see our object, not the pointer.
+        self.set_mouse_visible(False)
+
+        arcade.set_background_color(arcade.color.SKY_BLUE)
+
+        # Create our ball
+        self.chick1 = Chick(200, 200)
+        self.chick2 = Chick(400, 400)
 
     def on_draw(self):
+        """ Called whenever we need to draw the window. """
         arcade.start_render()
-        arcade.set_background_color(arcade.csscolor.SKY_BLUE)
+
         arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, SCREEN_HEIGHT / 3, 0, arcade.color.BITTER_LIME)
 
         draw_bush(140, 295)
@@ -71,46 +108,39 @@ class MyGame(arcade.Window):
         draw_nest(100, 50)
         draw_bush(400, 250)
 
+        self.chick1.draw()
+        self.chick2.draw()
 
+    def update(self, delta_time):
+        self.chick1.update()
+        self.chick2.update()
 
-class Chick:
-    """ This class manages a chick moving on the screen. """
+    def on_key_press(self, key, modifiers):
+        """ Called whenever the user presses a key. """
+        if key == arcade.key.A:
+            self.chick1.change_x = -MOVEMENT_SPEED
+        elif key == arcade.key.D:
+            self.chick1.change_x = MOVEMENT_SPEED
+        elif key == arcade.key.W:
+            self.chick1.change_y = MOVEMENT_SPEED
+        elif key == arcade.key.S:
+            self.chick1.change_y = -MOVEMENT_SPEED
 
-    def __init__(self, x, y, change_x, change_y):
-        """ Constructor. """
+    def on_key_release(self, key, modifiers):
+        """ Called whenever a user releases a key. """
+        if key == arcade.key.A or key == arcade.key.D:
+            self.chick1.change_x = 0
+        elif key == arcade.key.W or key == arcade.key.S:
+            self.chick1.change_y = 0
 
-        # Take the parameters of the init function above, and create instance variables out of them.
-        self.x = x
-        self.y = y
-        self.change_x = change_x
-        self.change_y = change_y
-
-    def draw(self):
-        """ Draw the chick 1 with the instance variables we have. """
-        draw_chick(200, 200)
-
-    def on_update(self, change_x, change_y):
-        """ Code to control the chick 1 movement. """
-
-        # Move the ball
-        self.y += self.change_y
-        self.x += self.change_x
-
-        # See if the ball hit the edge of the screen. If so, change direction
-        if self.x < 400:
-            self.change_x *= -1
-
-        if self.x > SCREEN_WIDTH - 300:
-            self.change_x *= -1
-
-        if self.y < 500:
-            self.change_y *= -1
-
-        if self.y > SCREEN_HEIGHT - 200:
-            self.change_y *= -1
+    def on_mouse_motion(self, x, y, dx, dy):
+        """ Called to update our objects.
+        Happens approximately 60 times per second."""
+        self.chick2.position_x = x
+        self.chick2.position_y = y
 
 def main():
-    window = MyGame()
+    window = MyGame(800, 600, "Lab 7")
     arcade.run()
 
 
