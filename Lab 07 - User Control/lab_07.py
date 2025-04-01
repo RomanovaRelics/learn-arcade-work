@@ -85,7 +85,8 @@ class MyGame(arcade.Window):
         # Call the parent class's init function
         super().__init__(width, height, title)
 
-        chick_sound = arcade.load_sound("chirp.wav")
+        self.chick_sound = arcade.load_sound("chirp.wav")
+        self.edge_sound = arcade.load_sound("hurt3.wav")
 
         # Make the mouse disappear when it is over the window.
         # So we just see our object, not the pointer.
@@ -128,6 +129,19 @@ class MyGame(arcade.Window):
             self.chick1.change_y = -MOVEMENT_SPEED
         elif key == arcade.key.SPACE:
             arcade.play_sound(self.chick_sound)
+
+        if self.position_x < 80:
+            self.position_x = 80
+            arcade.play_sound(self.edge_sound)
+        if self.position_x > SCREEN_WIDTH - 70:
+            self.position_x = SCREEN_WIDTH - 70
+            arcade.play_sound(self.edge_sound)
+        if self.position_y < 80:
+            self.position_y = 80
+            arcade.play_sound(self.edge_sound)
+        if self.position_y > SCREEN_HEIGHT - 150:
+            self.position_y = SCREEN_HEIGHT - 150
+            arcade.play_sound(self.edge_sound)
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
