@@ -1,3 +1,4 @@
+
 import arcade
 
 SCREEN_WIDTH = 800
@@ -54,7 +55,6 @@ class Chick:
     change_x = 0
     change_y = 0
 
-
     def draw(self):
         """ Draw the balls with the instance variables we have. """
         draw_chick(self.position_x, self.position_y,)
@@ -84,6 +84,8 @@ class MyGame(arcade.Window):
 
         # Call the parent class's init function
         super().__init__(width, height, title)
+
+        chick_sound = arcade.load_sound("chirp.wav")
 
         # Make the mouse disappear when it is over the window.
         # So we just see our object, not the pointer.
@@ -124,6 +126,8 @@ class MyGame(arcade.Window):
             self.chick1.change_y = MOVEMENT_SPEED
         elif key == arcade.key.S:
             self.chick1.change_y = -MOVEMENT_SPEED
+        elif key == arcade.key.SPACE:
+            arcade.play_sound(self.chick_sound)
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
@@ -137,6 +141,9 @@ class MyGame(arcade.Window):
         Happens approximately 60 times per second."""
         self.chick2.position_x = x
         self.chick2.position_y = y
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        arcade.play_sound(self.chick_sound)
 
 def main():
     window = MyGame(800, 600, "Lab 7")
