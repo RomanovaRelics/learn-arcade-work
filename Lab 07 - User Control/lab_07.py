@@ -52,6 +52,10 @@ class Chick:
         self.position_x = position_x
         self.position_y = position_y
 
+        self.edge_sound_player = None
+        self.chick_sound = arcade.load_sound("chirp.wav")
+        self.edge_sound = arcade.load_sound(":resources:sounds/hurt3.wav")
+
     change_x = 0
     change_y = 0
 
@@ -77,6 +81,15 @@ class Chick:
         if self.position_y > SCREEN_HEIGHT - 150:
             self.position_y = SCREEN_HEIGHT - 150
 
+        if self.position_y >= SCREEN_HEIGHT - 150 or self.position_y <= 80:
+            if not self.edge_sound_player:
+                self.edge_sound_player = arcade.play_sound(self.edge_sound)
+        elif self.position_x >= SCREEN_WIDTH - 70 or self.position_x <= 80:
+            if not self.edge_sound_player:
+                self.edge_sound_player = arcade.play_sound(self.edge_sound)
+        else:
+            self.edge_sound_player = None
+
 
 class MyGame(arcade.Window):
 
@@ -84,9 +97,6 @@ class MyGame(arcade.Window):
 
         # Call the parent class's init function
         super().__init__(width, height, title)
-
-        self.chick_sound = arcade.load_sound("chirp.wav")
-        self.edge_sound = arcade.load_sound(":resources:sounds/hurt3.wav")
 
         # Make the mouse disappear when it is over the window.
         # So we just see our object, not the pointer.
@@ -97,6 +107,9 @@ class MyGame(arcade.Window):
         # Create our ball
         self.chick1 = Chick(200, 200)
         self.chick2 = Chick(400, 400)
+
+        self.chick_sound = arcade.load_sound("chirp.wav")
+        self.edge_sound = arcade.load_sound(":resources:sounds/hurt3.wav")
 
     def on_draw(self):
         """ Called whenever we need to draw the window. """
@@ -117,33 +130,30 @@ class MyGame(arcade.Window):
         self.chick1.update()
         self.chick2.update()
 
-        print(self.chick1.position_x)
-
     def on_key_press(self, key, modifiers):
         """ Called whenever the user presses a key. """
         if key == arcade.key.A:
             self.chick1.change_x = -MOVEMENT_SPEED
+            if self.chick1.position_x < 81:
+                self.chick1.position_x = 80
+                arcade.play_sound(self.edge_sound)
         elif key == arcade.key.D:
             self.chick1.change_x = MOVEMENT_SPEED
+            if self.chick1.position_x > SCREEN_WIDTH - 71:
+                self.chick1.position_x = SCREEN_WIDTH
+                arcade.play_sound(self.edge_sound)
         elif key == arcade.key.W:
             self.chick1.change_y = MOVEMENT_SPEED
+            if self.chick1.position_y >= SCREEN_HEIGHT - 150:
+                self.chick1.position_y = SCREEN_HEIGHT
+                arcade.play_sound(self.edge_sound)
         elif key == arcade.key.S:
             self.chick1.change_y = -MOVEMENT_SPEED
+            if self.chick1.position_y < 81:
+                self.chick1.position_y = 80
+                arcade.play_sound(self.edge_sound)
         elif key == arcade.key.SPACE:
             arcade.play_sound(self.chick_sound)
-
-        if self.chick1.position_x < 80:
-            self.chick1.position_x = 80
-            arcade.play_sound(self.edge_sound)
-        if self.chick1.position_x > SCREEN_WIDTH - 71:
-            self.chick1.position_x = SCREEN_WIDTH
-            arcade.play_sound(self.edge_sound)
-        if self.chick1.position_y < 80:
-            self.chick1.position_y = 80
-            arcade.play_sound(self.edge_sound)
-        if self.chick1.position_y > SCREEN_HEIGHT - 200:
-            self.chick1.position_y = SCREEN_HEIGHT
-            arcade.play_sound(self.edge_sound)
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
