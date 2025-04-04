@@ -15,18 +15,30 @@ SCREEN_HEIGHT = 600
 class Coin(arcade.Sprite):
 
     def __init__(self, filename, sprite_scaling):
+
         super().__init__(filename, sprite_scaling)
 
         self.change_x = 0
         self.change_y = 0
 
-    def update(self):
-        self.center_y -= 1
+    def update(self, delta_time: float = 1 / 60) -> None:
 
-        if self.center_y == 0:
-            self.center_y = SCREEN_HEIGHT
-        if self.top == 0:
-            self.bottom = SCREEN_HEIGHT
+        # Move the coin
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        # If we are out-of-bounds, then 'bounce'
+        if self.left < 0:
+            self.change_x *= -1
+
+        if self.right > SCREEN_WIDTH:
+            self.change_x *= -1
+
+        if self.bottom < 0:
+            self.change_y *= -1
+
+        if self.top > SCREEN_HEIGHT:
+            self.change_y *= -1
 
 
 class MyGame(arcade.Window):
@@ -36,6 +48,8 @@ class MyGame(arcade.Window):
         """ Initializer """
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Sprite Example")
+
+        self.coin_sound = arcade.load_sound(":resources:sounds/coin5.wav")
 
         # Variables that will hold sprite lists
         self.player_list = None
@@ -77,6 +91,8 @@ class MyGame(arcade.Window):
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
             coin.center_y = random.randrange(SCREEN_HEIGHT)
+            coin.change_x = random.randrange(-3, 4)
+            coin.change_y = random.randrange(-3, 4)
 
             # Add the coin to the lists
             self.coin_list.append(coin)
@@ -113,6 +129,7 @@ class MyGame(arcade.Window):
         for coin in hit_list:
             coin.remove_from_sprite_lists()
             self.score += 1
+            arcade.play_sound(self.coin_sound)
 
 
 def main():
