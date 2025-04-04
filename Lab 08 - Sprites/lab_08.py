@@ -5,7 +5,7 @@ import arcade
 
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.5
-SPRITE_SCALING_COIN = 0.2
+SPRITE_SCALING_ECTOPLASM = 0.2
 ECTOPLASM_COUNT = 50
 
 SCREEN_WIDTH = 800
@@ -69,7 +69,7 @@ class MyGame(arcade.Window):
 
         # Sprite lists
         self.player_list = arcade.SpriteList()
-        self.coin_list = arcade.SpriteList()
+        self.ectoplasm_list = arcade.SpriteList()
 
         # Score
         self.score = 0
@@ -82,25 +82,25 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player_sprite)
 
         # Create the coins
-        for i in range(COIN_COUNT):
+        for i in range(ECTOPLASM_COUNT):
 
-            # Create the coin instance
-            # Coin image from kenney.nl
-            coin = Coin(":resources:images/items/gold_1.png", SPRITE_SCALING_COIN)
+            # Create the ectoplasm instance
+            # Ectoplasm image from kenney.nl
+            ectoplasm = Ectoplasm("spinner_hit.png", SPRITE_SCALING_ECTOPLASM)
 
             # Position the coin
-            coin.center_x = random.randrange(SCREEN_WIDTH)
-            coin.center_y = random.randrange(SCREEN_HEIGHT)
-            coin.change_x = random.randrange(-3, 4)
-            coin.change_y = random.randrange(-3, 4)
+            ectoplasm.center_x = random.randrange(SCREEN_WIDTH)
+            ectoplasm.center_y = random.randrange(SCREEN_HEIGHT)
+            ectoplasm.change_x = random.randrange(-3, 4)
+            ectoplasm.change_y = random.randrange(-3, 4)
 
             # Add the coin to the lists
-            self.coin_list.append(coin)
+            self.ectoplasm_list.append(ectoplasm)
 
     def on_draw(self):
         """ Draw everything """
         arcade.start_render()
-        self.coin_list.draw()
+        self.ectoplasm_list.draw()
         self.player_list.draw()
 
         # Put the text on the screen.
@@ -119,17 +119,17 @@ class MyGame(arcade.Window):
 
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
-        self.coin_list.update()
+        self.ectoplasm_list.update()
 
         # Generate a list of all sprites that collided with the player.
         hit_list = arcade.check_for_collision_with_list(self.player_sprite,
-                                                        self.coin_list)
+                                                        self.ectoplasm_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
-        for coin in hit_list:
-            coin.remove_from_sprite_lists()
+        for ectoplasm in hit_list:
+            ectoplasm.remove_from_sprite_lists()
             self.score += 1
-            arcade.play_sound(self.coin_sound)
+            arcade.play_sound(self.ghost_sound)
 
 
 def main():
