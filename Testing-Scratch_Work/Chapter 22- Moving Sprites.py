@@ -14,6 +14,12 @@ SCREEN_HEIGHT = 600
 
 class Coin(arcade.Sprite):
 
+    def __init__(self, filename, sprite_scaling):
+        super().__init__(filename, sprite_scaling)
+
+        self.change_x = 0
+        self.change_y = 0
+
     def update(self):
         self.center_y -= 1
 
