@@ -2,13 +2,13 @@ import random
 import arcade
 import math
 
-SPRITE_SCALING = 0.5
+SPRITE_SCALING = 0.9
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 
-class Coin(arcade.Sprite):
+class Ectoplasm(arcade.Sprite):
 
     def __init__(self, filename, sprite_scaling):
         """ Constructor. """
@@ -50,7 +50,7 @@ class MyGame(arcade.Window):
 
         # Sprite lists
         self.player_list = None
-        self.coin_list = None
+        self.ectoplasm_list = None
 
         # Set up the player
         self.score = 0
@@ -61,13 +61,13 @@ class MyGame(arcade.Window):
 
         # Sprite lists
         self.player_list = arcade.SpriteList()
-        self.coin_list = arcade.SpriteList()
+        self.ectoplasm_list = arcade.SpriteList()
 
         # Set up the player
         self.score = 0
 
         # Character image from kenney.nl
-        self.player_sprite = arcade.Sprite("character.png", SPRITE_SCALING)
+        self.player_sprite = arcade.Sprite("bat_fly.png", SPRITE_SCALING)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 70
         self.player_list.append(self.player_sprite)
@@ -76,26 +76,26 @@ class MyGame(arcade.Window):
 
             # Create the coin instance
             # Coin image from kenney.nl
-            coin = Coin("coin_01.png", SPRITE_SCALING / 3)
+            ectoplasm = Ectoplasm("spinner_hit.png", SPRITE_SCALING / 3)
 
             # Position the center of the circle the coin will orbit
-            coin.circle_center_x = random.randrange(SCREEN_WIDTH)
-            coin.circle_center_y = random.randrange(SCREEN_HEIGHT)
+            ectoplasm.circle_center_x = random.randrange(SCREEN_WIDTH)
+            ectoplasm.circle_center_y = random.randrange(SCREEN_HEIGHT)
 
             # Random radius from 10 to 200
-            coin.circle_radius = random.randrange(10, 200)
+            ectoplasm.circle_radius = random.randrange(10, 200)
 
             # Random start angle from 0 to 2pi
-            coin.circle_angle = random.random() * 2 * math.pi
+            ectoplasm.circle_angle = random.random() * 2 * math.pi
 
             # Add the coin to the lists
-            self.coin_list.append(coin)
+            self.ectoplasm_list.append(ectoplasm)
 
         # Don't show the mouse cursor
         self.set_mouse_visible(False)
 
         # Set the background color
-        arcade.set_background_color(arcade.color.AMAZON)
+        arcade.set_background_color(arcade.color.ASH_GREY)
 
     def on_draw(self):
 
@@ -103,7 +103,7 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         # Draw all the sprites.
-        self.coin_list.draw()
+        self.ectoplasm_list.draw()
         self.player_list.draw()
 
         # Put the text on the screen.
@@ -119,16 +119,16 @@ class MyGame(arcade.Window):
 
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
-        self.coin_list.update()
+        self.ectoplasm_list.update()
 
         # Generate a list of all sprites that collided with the player.
         hit_list = arcade.check_for_collision_with_list(self.player_sprite,
-                                                        self.coin_list)
+                                                        self.ectoplasm_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
-        for coin in hit_list:
+        for ectoplasm in hit_list:
             self.score += 1
-            coin.remove_from_sprite_lists()
+            ectoplasm.remove_from_sprite_lists()
 
 
 def main():
