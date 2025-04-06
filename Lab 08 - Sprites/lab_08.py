@@ -1,12 +1,32 @@
+
 import random
 import arcade
 import math
 
 SPRITE_SCALING = 0.9
 
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+class Bat(arcade.Sprite):
+
+    def reset_pos(self):
+
+        # Reset the coin to a random spot above the screen
+        self.center_y = random.randrange(SCREEN_HEIGHT + 20,
+                                         SCREEN_HEIGHT + 100)
+        self.center_x = random.randrange(SCREEN_WIDTH)
+
+    def update(self):
+
+        # Move the coin
+        self.center_y -= 1
+
+        # See if the coin has fallen off the bottom of the screen.
+        # If so, reset it.
+        if self.top < 0:
+            self.reset_pos()
 
 class Ectoplasm(arcade.Sprite):
 
@@ -48,9 +68,13 @@ class MyGame(arcade.Window):
 
         super().__init__(width, height)
 
+        # Load sounds
+        self.ghost_sound = arcade.load_sound(":resources:sounds/jump3.wav")
+        self.bat_sound = arcade.load_sound(":resources:sounds/hurt1.wav")
         # Sprite lists
         self.player_list = None
         self.ectoplasm_list = None
+        self.bat_list = None
 
         # Set up the player
         self.score = 0
@@ -62,12 +86,19 @@ class MyGame(arcade.Window):
         # Sprite lists
         self.player_list = arcade.SpriteList()
         self.ectoplasm_list = arcade.SpriteList()
+        self.bat_list = arcade.SpriteList()
 
         # Set up the player
         self.score = 0
 
-        # Character image from kenney.nl
-        self.player_sprite = arcade.Sprite("bat_fly.png", SPRITE_SCALING)
+        # Don't show the mouse cursor
+        self.set_mouse_visible(False)
+
+        # Set the background color
+        arcade.set_background_color(arcade.color.ASH_GREY)
+
+        # Ghost image from kenney.nl
+        self.player_sprite = arcade.Sprite("ghost_normal.png", SPRITE_SCALING)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 70
         self.player_list.append(self.player_sprite)
@@ -75,12 +106,17 @@ class MyGame(arcade.Window):
         for i in range(50):
 
             # Create the coin instance
-            # Coin image from kenney.nl
+            # Both images from kenney.nl
             ectoplasm = Ectoplasm("spinner_hit.png", SPRITE_SCALING / 3)
+            bat = Bat("bat_fly.png",SPRITE_SCALING / 3)
 
-            # Position the center of the circle the coin will orbit
+            # Position the center of the circle the ectoplasm will orbit
             ectoplasm.circle_center_x = random.randrange(SCREEN_WIDTH)
             ectoplasm.circle_center_y = random.randrange(SCREEN_HEIGHT)
+
+            # Position the bats
+            bat.center_x = random.randrange(SCREEN_WIDTH)
+            bat.center_y = random.randrange(SCREEN_HEIGHT)
 
             # Random radius from 10 to 200
             ectoplasm.circle_radius = random.randrange(10, 200)
@@ -88,14 +124,9 @@ class MyGame(arcade.Window):
             # Random start angle from 0 to 2pi
             ectoplasm.circle_angle = random.random() * 2 * math.pi
 
-            # Add the coin to the lists
+            # Add the ectoplasm and bats to the lists
             self.ectoplasm_list.append(ectoplasm)
-
-        # Don't show the mouse cursor
-        self.set_mouse_visible(False)
-
-        # Set the background color
-        arcade.set_background_color(arcade.color.ASH_GREY)
+            self.bat_list.append(bat)
 
     def on_draw(self):
 
@@ -105,6 +136,7 @@ class MyGame(arcade.Window):
         # Draw all the sprites.
         self.ectoplasm_list.draw()
         self.player_list.draw()
+        self.bat_list.draw()
 
         # Put the text on the screen.
         output = "Score: " + str(self.score)
@@ -120,15 +152,24 @@ class MyGame(arcade.Window):
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
         self.ectoplasm_list.update()
+        self.bat_list.update()
 
         # Generate a list of all sprites that collided with the player.
         hit_list = arcade.check_for_collision_with_list(self.player_sprite,
-                                                        self.ectoplasm_list)
+                                                        self.ectoplasm_list,self.bat_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
         for ectoplasm in hit_list:
             self.score += 1
             ectoplasm.remove_from_sprite_lists()
+            arcade.play_sound(self.ghost_sound)
+
+        for bat in hit_list:
+            self.score -= 1
+            bat.remove_from_sprite_lists()
+            arcade.play_sound(self.bat_sound)
+
+
 
 
 def main():
