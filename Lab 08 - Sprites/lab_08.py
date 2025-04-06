@@ -13,17 +13,17 @@ class Bat(arcade.Sprite):
 
     def reset_pos(self):
 
-        # Reset the coin to a random spot above the screen
+        # Reset the bat to a random spot above the screen
         self.center_y = random.randrange(SCREEN_HEIGHT + 20,
                                          SCREEN_HEIGHT + 100)
         self.center_x = random.randrange(SCREEN_WIDTH)
 
     def update(self):
 
-        # Move the coin
+        # Move the bat
         self.center_y -= 1
 
-        # See if the coin has fallen off the bottom of the screen.
+        # See if the bat has fallen off the bottom of the screen.
         # If so, reset it.
         if self.top < 0:
             self.reset_pos()
@@ -155,22 +155,23 @@ class MyGame(arcade.Window):
         self.bat_list.update()
 
         # Generate a list of all sprites that collided with the player.
-        hit_list = arcade.check_for_collision_with_list(self.player_sprite,
-                                                        self.ectoplasm_list,self.bat_list)
+        ectoplasm_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                        self.ectoplasm_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
-        for ectoplasm in hit_list:
+        for ectoplasm in ectoplasm_hit_list:
             self.score += 1
             ectoplasm.remove_from_sprite_lists()
             arcade.play_sound(self.ghost_sound)
 
-        for bat in hit_list:
+            # Generate a list of all sprites that collided with the player.
+        bat_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                                      self.bat_list, )
+
+        for bat in bat_hit_list:
             self.score -= 1
             bat.remove_from_sprite_lists()
             arcade.play_sound(self.bat_sound)
-
-
-
 
 def main():
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
