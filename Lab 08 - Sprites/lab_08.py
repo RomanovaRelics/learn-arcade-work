@@ -1,4 +1,4 @@
-"""Lab 8 - Spooky Guy"""
+"""Lab 8 - Spooky Guy!"""
 
 import random
 import arcade
