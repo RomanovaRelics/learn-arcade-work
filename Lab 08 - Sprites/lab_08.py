@@ -6,7 +6,6 @@ import math
 
 SPRITE_SCALING = 0.9
 
-
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
@@ -142,6 +141,16 @@ class MyGame(arcade.Window):
         # Put the text on the screen.
         output = "Score: " + str(self.score)
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+
+        if len(self.ectoplasm_list) == 0:
+            arcade.Text(
+                text = "GAME OVER",
+                start_x = SCREEN_WIDTH // 2,
+                start_y = SCREEN_HEIGHT //2 -50,
+                color = arcade.color.WHITE,
+                font_size = 80,
+                anchor_x = "center",
+            ).draw()
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.player_sprite.center_x = x
