@@ -179,9 +179,11 @@ class MyGame(arcade.Window):
                                                                       self.bat_list, )
 
         for bat in bat_hit_list:
-            self.score -= 1
-            bat.remove_from_sprite_lists()
-            arcade.play_sound(self.bat_sound)
+            if len(self.ectoplasm_list) > 0:
+                bat.remove_from_sprite_lists()
+                self.score -= 1
+                bat.remove_from_sprite_lists()
+                arcade.play_sound(self.bat_sound)
 
 def main():
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
