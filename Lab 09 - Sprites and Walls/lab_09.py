@@ -112,14 +112,14 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player_sprite)
 
         # -- Set up several rows of walls
-        #for y in range(128, 600, 210):
-            #for x in range(0, 800, 64):
+        for y in range(128, 600, 210):
+            for x in range(0, 800, 64):
                 # Randomly skip a box so the player can find a way through
-                #if random.randrange(5) > 0:
-                    #wall = arcade.Sprite(":resources:images/tiles/stoneCenter_rounded.png", SPRITE_SCALING)
-                    #wall.center_x = x
-                    #wall.center_y = y
-                    #self.wall_list.append(wall)
+                if random.randrange(5) > 0:
+                    wall = arcade.Sprite(":resources:images/tiles/stoneCenter_rounded.png", SPRITE_SCALING)
+                    wall.center_x = x
+                    wall.center_y = y
+                    self.wall_list.append(wall)
 
         #Set up left border wall
         for y in range(0, 800, 64):
@@ -138,25 +138,24 @@ class MyGame(arcade.Window):
                 self.wall_list.append(wall)
 
         #Set up top border wall
-        for x in range(0, 1000, 64):
-            for y in range(1):
-                wall = arcade.Sprite(":resources:images/tiles/stoneCenter_rounded.png", SPRITE_SCALING)
-                wall.center_x = x
-                wall.center_y = y
-                self.wall_list.append(wall)
+        for x in range(0, 1025, 64):
+            wall = arcade.Sprite(":resources:images/tiles/stoneCenter_rounded.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 832
+            self.wall_list.append(wall)
 
         #Set up right border wall
-        for y in range(0, 800, 64):
+        for y in range(0, 832, 64):
             for x in range(1):
                 wall = arcade.Sprite(":resources:images/tiles/stoneCenter_rounded.png", SPRITE_SCALING)
-                wall.center_x = x
+                wall.center_x = 1020
                 wall.center_y = y
                 self.wall_list.append(wall)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
         # Set the background color
-        arcade.set_background_color(arcade.color.AMAZON)
+        arcade.set_background_color(arcade.color.GRAY)
 
     def on_draw(self):
         """ Render the screen. """
