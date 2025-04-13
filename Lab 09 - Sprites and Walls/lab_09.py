@@ -268,30 +268,19 @@ class MyGame(arcade.Window):
         # example though.)
         self.physics_engine.update()
 
-
         # Scroll the screen to the player
 
         self.scroll_to_player()
 
 
-
     def scroll_to_player(self):
 
         """
-
         Scroll the window to the player.
-
-
-
         if CAMERA_SPEED is 1, the camera will immediately move to the desired position.
-
         Anything between 0 and 1 will have the camera move to the location with a smoother
-
         pan.
-
         """
-
-
 
         position = Vec2(self.player_sprite.center_x - self.width / 2,
 
@@ -300,21 +289,16 @@ class MyGame(arcade.Window):
         self.camera_sprites.move_to(position, CAMERA_SPEED)
 
 
-
     def on_resize(self, width, height):
 
         """
-
         Resize window
-
         Handle the user grabbing the edge and resizing the window.
-
         """
 
         self.camera_sprites.resize(int(width), int(height))
 
         self.camera_gui.resize(int(width), int(height))
-
 
 
 def main():
