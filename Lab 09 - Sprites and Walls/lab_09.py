@@ -14,13 +14,13 @@ import os
 
 SPRITE_SCALING = 0.5
 SPRITE_WORM_SCALING = .3
-SPRITE_COIN_SCALING = .2
+SPRITE_COIN_SCALING = .3
 
 DEFAULT_SCREEN_WIDTH = 800
 DEFAULT_SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Worm Castle"
 
-NUMBER_OF_COINS = 50
+NUMBER_OF_COINS = 20
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
@@ -163,7 +163,7 @@ class MyGame(arcade.Window):
 
             #create coin
             #from kenney.nl
-            coin = arcade.Sprite(":resources:images/items/coinGold.png")
+            coin = arcade.Sprite(":resources:images/items/coinGold.png",SPRITE_COIN_SCALING)
 
             #boolean variable if we successfully placed coin
             coin_placed_successfully = False
@@ -206,6 +206,7 @@ class MyGame(arcade.Window):
         # Draw all the sprites.
         self.wall_list.draw()
         self.player_list.draw()
+        self.coin_list.draw()
 
 
         # Select the (unscrolled) camera for our GUI
