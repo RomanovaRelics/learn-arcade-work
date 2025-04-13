@@ -10,13 +10,17 @@ python -m arcade.examples.sprite_move_scrolling
 import random
 import arcade
 from pyglet.math import Vec2
+import os
 
 SPRITE_SCALING = 0.5
 SPRITE_WORM_SCALING = .3
+SPRITE_COIN_SCALING = .2
 
 DEFAULT_SCREEN_WIDTH = 800
 DEFAULT_SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Sprite Move with Scrolling Screen Example"
+SCREEN_TITLE = "Worm Castle"
+
+NUMBER_OF_COINS = 50
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
@@ -73,6 +77,7 @@ class MyGame(arcade.Window):
         # Sprite lists
         self.player_list = None
         self.wall_list = None
+        self.coin_list = None
 
         # Set up the player
         self.player_sprite = None
@@ -102,6 +107,7 @@ class MyGame(arcade.Window):
         # Sprite lists
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.coin_list = arcade.SpriteList()
 
         # Set up the player
         #self.player_sprite = arcade.Sprite(":resources:images/enemies/wormPink.png",
@@ -111,7 +117,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 512
         self.player_list.append(self.player_sprite)
 
-        # -- Set up several rows of walls
+        # -- Set up random horizontal walls
         for y in range(128, 600, 210):
             for x in range(0, 800, 64):
                 # Randomly skip a box so the player can find a way through
@@ -151,6 +157,34 @@ class MyGame(arcade.Window):
                 wall.center_x = 1020
                 wall.center_y = y
                 self.wall_list.append(wall)
+
+        #Randomly place coins where there is no wall or coin
+        for i in range(NUMBER_OF_COINS):
+
+            #create coin
+            #from kenney.nl
+            coin = arcade.Sprite(":resources:images/items/coinGold.png")
+
+            #boolean variable if we successfully placed coin
+            coin_placed_successfully = False
+
+            #keep trying until success
+            while not coin_placed_successfully:
+                #position coin
+                coin.center_x = random.randrange(DEFAULT_SCREEN_WIDTH)
+                coin.center_y = random.randrange(DEFAULT_SCREEN_HEIGHT)
+
+                #does coin hit wall
+                wall_hit_list = arcade.check_for_collision_with_list(coin, self.wall_list)
+
+                #does coin hit coin
+                coin_hit_list = arcade.check_for_collision_with_list(coin, self.coin_list)
+
+                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                    #if it is set to true
+                    coin_placed_successfully = True
+            #add coin to lists
+            self.coin_list.append(coin)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
