@@ -14,7 +14,7 @@ import os
 
 SPRITE_SCALING = 0.5
 SPRITE_WORM_SCALING = .3
-SPRITE_COIN_SCALING = .3
+SPRITE_COIN_SCALING = .4
 
 DEFAULT_SCREEN_WIDTH = 800
 DEFAULT_SCREEN_HEIGHT = 600
@@ -73,6 +73,9 @@ class MyGame(arcade.Window):
         Initializer
         """
         super().__init__(width, height, title, resizable=True)
+
+        self.coin_sound = arcade.load_sound(":resources:sounds/coin5.wav")
+        self.wall_sound = arcade.load_sound(":resources:sounds/rockHit2.wav")
 
         # Sprite lists
         self.player_list = None
@@ -217,16 +220,19 @@ class MyGame(arcade.Window):
 
         self.camera_gui.use()
 
+        # Put the text on the screen.
+        output = "Score: " + str(self.score)
+        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
-        # Draw the GUI
-        arcade.draw_rectangle_filled(self.width // 2,
-                                     20,
-                                     self.width,
-                                     40,
-                                     arcade.color.ALMOND)
-        text = f"Scroll value: ({self.camera_sprites.position[0]:5.1f}, " \
-               f"{self.camera_sprites.position[1]:5.1f})"
-        arcade.draw_text(text, 10, 10, arcade.color.BLACK_BEAN, 20)
+        if len(self.coin_list) == 0:
+            arcade.Text(
+                text="You are now a really wealthy worm. Congrats!",
+                start_x= DEFAULT_SCREEN_WIDTH // 2,
+                start_y= DEFAULT_SCREEN_HEIGHT // 2,
+                color=arcade.color.BLACK_BEAN,
+                font_size=20,
+                anchor_x="center",
+            ).draw()
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -275,6 +281,8 @@ class MyGame(arcade.Window):
             for coin in coin_hit_list:
                 self.score += 1
                 coin.remove_from_sprite_lists()
+                arcade.play_sound(self.coin_sound)
+
 
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
