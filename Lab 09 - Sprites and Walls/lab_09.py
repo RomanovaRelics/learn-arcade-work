@@ -85,6 +85,9 @@ class MyGame(arcade.Window):
         # Physics engine so we don't run into walls.
         self.physics_engine = None
 
+        #Set up score
+        self.score = 0
+
         # Track the current state of what key is pressed
         self.left_pressed = False
         self.right_pressed = False
@@ -185,6 +188,14 @@ class MyGame(arcade.Window):
                     coin_placed_successfully = True
             #add coin to lists
             self.coin_list.append(coin)
+
+            # Generate a list of all sprites that collided with the player.
+        coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                                      self.coin_list)
+        for coin in coin_hit_list:
+            self.score += 1
+            coin.remove_from_sprite_lists()
+
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
