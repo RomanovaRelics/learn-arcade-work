@@ -189,13 +189,6 @@ class MyGame(arcade.Window):
             #add coin to lists
             self.coin_list.append(coin)
 
-            # Generate a list of all sprites that collided with the player.
-        coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
-                                                                      self.coin_list)
-        for coin in coin_hit_list:
-            self.score += 1
-            coin.remove_from_sprite_lists()
-
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
@@ -275,6 +268,13 @@ class MyGame(arcade.Window):
         elif self.right_pressed and not self.left_pressed:
             self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
         #If player tries to leave play zone do not let them
+
+            # Generate a list of all sprites that collided with the player.
+            coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                                 self.coin_list)
+            for coin in coin_hit_list:
+                self.score += 1
+                coin.remove_from_sprite_lists()
 
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
