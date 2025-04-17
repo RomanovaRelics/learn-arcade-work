@@ -26,43 +26,73 @@ def read_in_file(file_name):
 
     my_file.close()
 
-    print( "There are", len(line_list), "lines in the file.")
+    #print( "There are", len(line_list), "lines in the file.")
 
     return line_list
 
 def main():
-    #dictionary_lines = read_in_file("dictionary.txt")
-    #for word in dictionary_lines:
-        #print(word)
+    dictionary_words = read_in_file("dictionary.txt")
+
+
     chapter_lines = read_in_file("AliceInWonderLand200.txt")
-    chapter_words = []
-    #for word in alice_lines:
-        #print(word)
+    #chapter_words = []
 
-    for line in chapter_lines:
-        line_words = split_line(line)
-        for word in line_words:
-            chapter_words.append(word)
-            print(word)
+    #for line in chapter lines
+    for i in range(len(chapter_lines)):
+        words = split_line(chapter_lines[i])
+        for word in words:
+            #if not linear_search(word.upper(), dictionary_words):
+            if not binary_search(word.upper(), dictionary_words):
+                print(f'The word\'{word}\' is not in the dictionary.')
+                print(f'This word is found on line \'{i +1}\'.')
 
-def linear_search(word, dictionary):
+#def linear_search(word, dictionary):
 
     # Start at the beginning of the list
     current_position_in_dictionary = 0
 
-    found = False
+    #found = False
 
     # Loop until you reach the end of the list, or the value at the
     # current position is equal to the word
-    while current_position_in_dictionary < len(dictionary) and dictionary[current_position_in_dictionary] != word:
+    #while current_position_in_dictionary < len(dictionary) and dictionary[current_position_in_dictionary] != word:
         # Advance to the next word in the dictionary
-        current_position_in_dictionary += 1
+        #current_position_in_dictionary += 1
 
-    if current_position_in_dictionary < len(dictionary):
-        print("The name is at position", current_position_in_dictionary)
-        return True
+    #if current_position_in_dictionary < len(dictionary):
+        #print("The word is at position", current_position_in_dictionary)
+        #return True
+    #else:
+        #print("The word was not in the list.")
+        #return False
+
+def binary_search(word, dictionary):
+    lower_bound = 0
+    upper_bound = len(dictionary) - 1
+    found = False
+
+    # Loop until we find the item, or our upper/lower bounds meet
+    while lower_bound <= upper_bound and not found:
+
+        # Find the middle position
+        middle_pos = (lower_bound + upper_bound) // 2
+
+        # Figure out if we:
+        # move up the lower bound, or
+        # move down the upper bound, or
+        # we found what we are looking for
+        if dictionary[middle_pos] > word.upper():
+            lower_bound = middle_pos + 1
+        elif dictionary[middle_pos] < word.upper():
+            upper_bound = middle_pos - 1
+        else:
+            found = True
+
+    if found:
+        print("The word is at position", middle_pos)
     else:
-        print("The name was not in the list.")
-        return False
+        print("The word was not in the list.")
+
+
 
 main()
