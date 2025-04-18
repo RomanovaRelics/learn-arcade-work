@@ -30,22 +30,6 @@ def read_in_file(file_name):
 
     return line_list
 
-def main():
-    dictionary_words = read_in_file("dictionary.txt")
-
-
-    chapter_lines = read_in_file("AliceInWonderLand200.txt")
-    #chapter_words = []
-
-    #for line in chapter lines
-    for i in range(len(chapter_lines)):
-        words = split_line(chapter_lines[i])
-        for word in words:
-            #if not linear_search(word.upper(), dictionary_words):
-            if not binary_search(word.upper(), dictionary_words):
-                print(f'The word\'{word}\' is not in the dictionary.')
-                print(f'This word is found on line \'{i +1}\'.')
-
 #def linear_search(word, dictionary):
 
     # Start at the beginning of the list
@@ -81,9 +65,9 @@ def binary_search(word, dictionary):
         # move up the lower bound, or
         # move down the upper bound, or
         # we found what we are looking for
-        if dictionary[middle_pos] > word.upper():
+        if dictionary[middle_pos] < word.upper():
             lower_bound = middle_pos + 1
-        elif dictionary[middle_pos] < word.upper():
+        elif dictionary[middle_pos] > word.upper():
             upper_bound = middle_pos - 1
         else:
             found = True
@@ -93,6 +77,18 @@ def binary_search(word, dictionary):
     else:
         return False
 
+def main():
+    dictionary_words = read_in_file("dictionary.txt")
+    chapter_lines = read_in_file("AliceInWonderLand200.txt")
+    #chapter_words = []
 
+    #for line in chapter lines
+    for i in range(len(chapter_lines)):
+        words = split_line(chapter_lines[i])
+        for word in words:
+            #if not linear_search(word.upper(), dictionary_words):
+            if not binary_search(word.upper(), dictionary_words):
+                print(f'The word\'{word}\' is not in the dictionary.')
+                print(f'This word is found on line \'{i +1}\'.')
 
 main()
