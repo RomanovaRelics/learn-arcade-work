@@ -49,7 +49,7 @@ def main():
 #def linear_search(word, dictionary):
 
     # Start at the beginning of the list
-    current_position_in_dictionary = 0
+    #current_position_in_dictionary = 0
 
     #found = False
 
@@ -89,9 +89,9 @@ def binary_search(word, dictionary):
             found = True
 
     if found:
-        print("The word is at position", middle_pos)
+        return True
     else:
-        print("The word was not in the list.")
+        return False
 
 
 
