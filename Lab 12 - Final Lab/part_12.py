@@ -101,9 +101,25 @@ def main():
                 "One has a pink bedspread dulled only by the cacophony of dolls strewn across it. The other had\n"
                 "a blue bedspread and was covered in model airplanes and various sports balls. Most of the room\n"
                 "was taken up by the beds and the twin desks across from the door. Beautiful drawings covered both desks\n"
-                "even falling to the floor in their avalanche of progress.", 8, 11, None, None, None, None)
+                "even falling to the floor in their avalanche of progress.\n"
+                "You can go back North to the stairwell.\n"
+                "You can go East through a small door between the two beds.", 8, 11, None, None, None, None)
     room_list.append(room)
 
+
+    room = Room("A large rusty furnace takes up almost the entirety of the small room. For looking like it has not been used in\n"
+                "decades, the room is as warm as if it were functioning on full power. You wonder how this could be as the\n"
+                "rest of the house is cold with some small pockets seeming almost freezing.\n"
+                "The only way you can go from here is back West.", 10, None, None, None, None, None)
+    room_list.append(room)
+
+
+    room = Room(" The attic is as dusty as you would except given the state of the rest fo the house. There are many\n"
+                "things you can only describe as being 'attic-y' like old boxes, a dress form, a manikin head.\n"
+                "You ponder quietly to yourself about why manikin heads always seem to turn up in creepy\n"
+                "old attics where they don't belong.\n"
+                "You cna only go back down from here.", None, None, None, None, None, 5)
+    room_list.append(room)
 
 
     current_room = 0
