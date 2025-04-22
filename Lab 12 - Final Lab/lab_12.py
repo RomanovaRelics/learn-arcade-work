@@ -14,10 +14,45 @@ class Room:
         self.up = up
         self.down = down
 
+class Item:
+    """This class represents interactable items within the house."""
+    def __init__(self, description, in_room):
+        self.description = description
+        self.in_room = in_room
+
 def main():
 
     room_list = []
     visited = []
+
+    item_list = []
+
+    item = Item("An old steamer chest sits in the corner. It has faded travel stickers from across the world dating\n"
+                "from what seems like throughout the 1800s. It has a big heavy brass lock keeping the veritable\n"
+                "time capsule treasure trove inside safe from the relentless wear of external years. You sense\n"
+                "there is something important inside. Maybe you should look for a matching key.", 12)
+    item_list.append(item)
+
+
+    item = Item(" A red ball sits on the floor. It looks fun to play with but since there is a massive rat in the way,\n"
+                "you don't try to use it. Maybe you could reach it if you find something to distract the rat.", 4)
+    item_list.append(item)
+
+    item = Item("Ol' Betsy catches on something shiny and metallic stuck in the sink drain. Unfortunately, that shiny item\n"
+                "is being guarded by a spider. It doesn't seem mean per say but you have an aversion to it anyway.\n"
+                "Maybe you could find something to move the spider out of the way. Preferably something long.", 7)
+    item_list.append(item)
+
+    item = Item("There is a table with some suspiciously fresh cheese on it. You feel your stomach rumble\n"
+                "involuntarily but you probably shouldn't eat it. Besides you have plenty of candy awaiting\n"
+                "you in the coming days.\n"
+                "Do you want to grab the cheese?", 5)
+    item_list.append(item)
+
+    item = Item("You find a long thin spatula sitting alone in a jar on the rundown counter top. You think to\n"
+                "yourself that it might be useful if you come across anything you want to keep at a distance.\n"
+                "Do you want to grab the spatula?", 5)
+    item_list.append(item)
 
     room = Room("You find yourself standing on the sagging porch of the notoriously\n"
                 "haunted Maxwell place. Eerie creaking sounds come from deep within the house.\n"
@@ -63,9 +98,9 @@ def main():
 
 
     room = Room("You pass through the archway. A pungent smell of decay emanates from the ice-chest. \n"
-                "There is a table with some suspiciously fresh food on it. Has someone or some... thing been living here?\n"
                 "There are some other things like an old stove and a few half opened cabinets. \n"
-                "\nThe only way you can go is back East.", None, 3, None,None, None, 8)
+                "\nYou can go back East.\n"
+                "You can go down to the basement.", None, 3, None,None, None, 8)
     room_list.append(room)
 
 
@@ -95,7 +130,8 @@ def main():
     room = Room("You enter the Eastern archway. The room has the same concrete floor as the stairwell room but noticeably dirtier.\n"
                 "There are boxes and toys strewn about in large piles. There seems to be some method to the madness\n"
                 "although not one you can easily discern. It almost seems like things were in the process of being sorted but\n"
-                "the organizing party took a break for lunch and never came back.", None, None, None, 8, None, None)
+                "the organizing party took a break for lunch and never came back.\n"
+                "You can only go back West from here.", None, None, None, 8, None, None)
     room_list.append(room)
 
 
