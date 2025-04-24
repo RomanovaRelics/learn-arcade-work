@@ -54,6 +54,27 @@ def main():
                 "Do you want to grab the spatula?", 5)
     item_list.append(item)
 
+    item = Item("A beautiful doll sits at a small tea party set for three. You wonder if she knows\n"
+                "the other party attendants will never arrive. You feel a sense of loneliness coming from the doll.\n"
+                "A brief vision flashes in front of you. You recognize the doll dressed in tea party finery. She is being\n"
+                "pushed in a delicate pram around the room by a happy little girl. You feel a sense of longing to be\n"
+                "reunited with the small girl and take another promenade around in her pram. Your vision clears but the\n"
+                "feeling of deep longing sticks with you. You can't help but want to ease the pain.", 9)
+    item_list.append(item)
+
+    item = Item(" A delicate pram sits by the foot of the pink bed. It seems sad such a beautiful pram should\n"
+                "not have a passenger. You wonder what you could do about it.", 10)
+    item_list.append(item)
+
+    item = Item(" A gleaming pearl necklace catches your eye. You see a vision of an older woman clearly ill lying in a stately bed.\n"
+                "You see her slowly take the necklace off of her delicate pale neck. Her thin hands tremble as she folds it into the\n"
+                "hand of a young lady. You get a feeling that the old woman did not live for too long after this moment. You feel\n"
+                "a sense of sadness overtake you. Did this young woman have to take care of the younger children\n"
+                "after the death of the elder? She was barely a teenager. You see another flash of the young woman locking away the\n"
+                "necklace in the attic as she looks out the small window bitterly looking at her old friends and the life she could\n"
+                "have had. You feel the key was dropped somewhere dark and wet and regret loomed large after hiding away the necklace.\n"
+                " Maybe you could help ease the regret of an old rash decision made in a moment of anger and help these feelings move on.", 12)
+    item_list.append(item)
     room = Room("You find yourself standing on the sagging porch of the notoriously\n"
                 "haunted Maxwell place. Eerie creaking sounds come from deep within the house.\n"
                 "Your friends stare at you from the safety of the sidewalk and gesture wildly\n"
