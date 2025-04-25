@@ -75,6 +75,22 @@ def main():
                 "have had. You feel the key was dropped somewhere dark and wet and regret loomed large after hiding away the necklace.\n"
                 " Maybe you could help ease the regret of an old rash decision made in a moment of anger and help these feelings move on.", 12)
     item_list.append(item)
+
+    item = Item("You find an intricate jewelry box made of inlaid wood. The letters M A are carved into the top corner with a crude\n"
+                "but delicate hand. Inside, you find a few assortments of earrings, rings and the like but there seems to be an\n"
+                "empty space. You wonder what belonged here and why it was no longer in its comfortable velvet home.", 6)
+    item_list.append(item)
+
+    item = Item("You see a worn photograph sitting in a plain frame on a long sidetable. It shows three children. One, taller\n"
+                "than the others with dark brown hair. She looks old beyond her years like a child forced to grow up too soon.\n"
+                "She wears a plain blue dress but what stands out the most is a simple but elegant string of pearls around her neck.\n"
+                "She looks conflicted about wearing it as one hand gently reaches to touch them. You follow her other arm down to see\n"
+                "a little girl smiling sadly up at you holding in the hand not holding the elder child's, an antique doll with all her might. \n"
+                "You are a tad surprised the doll didn't break with how white the child's knuckles are. To her left is a small boy perhaps 6 years\n"
+                "of age. He confidently wears a much too small sailors suit. In his hand is a shiny red ball. With the mischief glinting\n"
+                "in his eyes, you have no doubt he and that ball caused many a ruckus.",1)
+    item_list.append(item)
+
     room = Room("You find yourself standing on the sagging porch of the notoriously\n"
                 "haunted Maxwell place. Eerie creaking sounds come from deep within the house.\n"
                 "Your friends stare at you from the safety of the sidewalk and gesture wildly\n"
