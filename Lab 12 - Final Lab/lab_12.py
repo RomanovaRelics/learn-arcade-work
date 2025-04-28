@@ -16,9 +16,10 @@ class Room:
 
 class Item:
     """This class represents interactable items within the house."""
-    def __init__(self, description, in_room):
+    def __init__(self, description, in_room, object_name):
         self.description = description
         self.in_room = in_room
+        self.object_name = object_name
 
 def main():
 
@@ -30,28 +31,28 @@ def main():
     item = Item("An old steamer chest sits in the corner. It has faded travel stickers from across the world dating\n"
                 "from what seems like throughout the 1800s. It has a big heavy brass lock keeping the veritable\n"
                 "time capsule treasure trove inside safe from the relentless wear of external years. You sense\n"
-                "there is something important inside. Maybe you should look for a matching key.", 12)
+                "there is something important inside. Maybe you should look for a matching key.", 12, "chest")
     item_list.append(item)
 
 
     item = Item(" A red ball sits on the floor. It looks fun to play with but since there is a massive rat in the way,\n"
-                "you don't try to use it. Maybe you could reach it if you find something to distract the rat.", 4)
+                "you don't try to use it. Maybe you could reach it if you find something to distract the rat.", 4, "ball")
     item_list.append(item)
 
     item = Item("Ol' Betsy catches on something shiny and metallic stuck in the sink drain. Unfortunately, that shiny item\n"
                 "is being guarded by a spider. It doesn't seem mean per say but you have an aversion to it anyway.\n"
-                "Maybe you could find something to move the spider out of the way. Preferably something long.", 7)
+                "Maybe you could find something to move the spider out of the way. Preferably something long.", 7, "key")
     item_list.append(item)
 
     item = Item("There is a table with some suspiciously fresh cheese on it. You feel your stomach rumble\n"
                 "involuntarily but you probably shouldn't eat it. Besides you have plenty of candy awaiting\n"
                 "you in the coming days.\n"
-                "Do you want to grab the cheese?", 5)
+                "Do you want to grab the cheese?", 5, "cheese")
     item_list.append(item)
 
     item = Item("You find a long thin spatula sitting alone in a jar on the rundown counter top. You think to\n"
                 "yourself that it might be useful if you come across anything you want to keep at a distance.\n"
-                "Do you want to grab the spatula?", 5)
+                "Do you want to grab the spatula?", 5, "spatula")
     item_list.append(item)
 
     item = Item("A beautiful doll sits at a small tea party set for three. You wonder if she knows\n"
@@ -59,11 +60,11 @@ def main():
                 "A brief vision flashes in front of you. You recognize the doll dressed in tea party finery. She is being\n"
                 "pushed in a delicate pram around the room by a happy little girl. You feel a sense of longing to be\n"
                 "reunited with the small girl and take another promenade around in her pram. Your vision clears but the\n"
-                "feeling of deep longing sticks with you. You can't help but want to ease the pain.", 9)
+                "feeling of deep longing sticks with you. You can't help but want to ease the pain.", 9, "doll")
     item_list.append(item)
 
     item = Item(" A delicate pram sits by the foot of the pink bed. It seems sad such a beautiful pram should\n"
-                "not have a passenger. You wonder what you could do about it.", 10)
+                "not have a passenger. You wonder what you could do about it.", 10, "pram")
     item_list.append(item)
 
     item = Item(" A gleaming pearl necklace catches your eye. You see a vision of an older woman clearly ill lying in a stately bed.\n"
@@ -73,12 +74,12 @@ def main():
                 "after the death of the elder? She was barely a teenager. You see another flash of the young woman locking away the\n"
                 "necklace in the attic as she looks out the small window bitterly looking at her old friends and the life she could\n"
                 "have had. You feel the key was dropped somewhere dark and wet and regret loomed large after hiding away the necklace.\n"
-                " Maybe you could help ease the regret of an old rash decision made in a moment of anger and help these feelings move on.", 12)
+                " Maybe you could help ease the regret of an old rash decision made in a moment of anger and help these feelings move on.", 12, "necklace")
     item_list.append(item)
 
     item = Item("You find an intricate jewelry box made of inlaid wood. The letters M A are carved into the top corner with a crude\n"
                 "but delicate hand. Inside, you find a few assortments of earrings, rings and the like but there seems to be an\n"
-                "empty space. You wonder what belonged here and why it was no longer in its comfortable velvet home.", 6)
+                "empty space. You wonder what belonged here and why it was no longer in its comfortable velvet home.", 6, "box")
     item_list.append(item)
 
     item = Item("You see a worn photograph sitting in a plain frame on a long sidetable. It shows three children. One, taller\n"
@@ -88,7 +89,7 @@ def main():
                 "a little girl smiling sadly up at you holding in the hand not holding the elder child's, an antique doll with all her might. \n"
                 "You are a tad surprised the doll didn't break with how white the child's knuckles are. To her left is a small boy perhaps 6 years\n"
                 "of age. He confidently wears a much too small sailors suit. In his hand is a shiny red ball. With the mischief glinting\n"
-                "in his eyes, you have no doubt he and that ball caused many a ruckus.",1)
+                "in his eyes, you have no doubt he and that ball caused many a ruckus.",1, "photograph")
     item_list.append(item)
 
     room = Room("You find yourself standing on the sagging porch of the notoriously\n"
