@@ -61,9 +61,15 @@ class MyGame(arcade.Window):
             column = x // (WIDTH + MARGIN)
             row = y // (HEIGHT + MARGIN)
             print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
-            if self.grid[row][column] == (self.grid[row][column] + 1) % 2:
-
-
+            self.grid[row][column] = (self.grid[row][column] + 1) % 2
+            if row > 0:
+                self.grid[row - 1][column] = (self.grid[row-1][column] + 1) % 2
+            if row < ROW_COUNT -1:
+                self.grid[row + 1][column] = (self.grid[row +1][column] + 1) % 2
+            if column > 0:
+                self.grid[row][column - 1] = (self.grid[row][column -1] + 1) % 2
+            if column < COLUMN_COUNT -1:
+                self.grid[row][column + 1] = (self.grid[row][column + 1] + 1) % 2
 
         pass
 
