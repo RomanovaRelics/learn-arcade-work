@@ -89,6 +89,31 @@ class MyGame(arcade.Window):
                     cell_per_column += 1
             print(f'Column {column} has {cell_per_column} cells selected.')
 
+        #Print continuous squares in row
+        for row in range(ROW_COUNT):
+            continuous_row_count = 0
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 1:
+                    continuous_row_count +=1
+                else:
+                    if continuous_row_count > 1:
+                        print(f'There are {continuous_row_count} continuous cells selected on row {row}.')
+                    continuous_row_count = 0
+            if continuous_row_count > 1:
+                print(f'There are {continuous_row_count} continuous cells selected on row {row}.')
+
+                # Print continuous squares in column
+                for column in range(COLUMN_COUNT):
+                    continuous_column_count = 0
+                    for row in range(ROW_COUNT):
+                        if self.grid[row][column] == 1:
+                            continuous_column_count += 1
+                        else:
+                            if continuous_column_count > 1:
+                                print(f'There are {continuous_column_count} continuous cells selected on column. {column}.')
+                            continuous_column_count = 0
+                    if continuous_column_count > 1:
+                        print(f'There are {continuous_column_count} continuous cells selected on column. {column}.')
 
         pass
 
