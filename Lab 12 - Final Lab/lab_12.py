@@ -14,6 +14,7 @@ class Room:
         self.up = up
         self.down = down
 
+
 class Item:
     """This class represents interactable items within the house."""
     def __init__(self, description, in_room, object_name):
@@ -27,6 +28,7 @@ def main():
     visited = []
 
     item_list = []
+
 
     item = Item("An old steamer chest sits in the corner. It has faded travel stickers from across the world dating\n"
                 "from what seems like throughout the 1800s. It has a big heavy brass lock keeping the veritable\n"
@@ -91,6 +93,8 @@ def main():
                 "of age. He confidently wears a much too small sailors suit. In his hand is a shiny red ball. With the mischief glinting\n"
                 "in his eyes, you have no doubt he and that ball caused many a ruckus.",1, "photograph")
     item_list.append(item)
+
+
 
     room = Room("You find yourself standing on the sagging porch of the notoriously\n"
                 "haunted Maxwell place. Eerie creaking sounds come from deep within the house.\n"
