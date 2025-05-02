@@ -208,13 +208,20 @@ def main():
     ghost = False
     win = False
 
+    moved = True
+    found = False
+
+    inventory = []
+
+
     while not done:
 
         if room_list[current_room] not in visited:
             visited.append(room_list[current_room])
 
         print()
-        print(room_list[current_room].description)
+        if moved == True:
+            print(room_list[current_room].description)
 
         visit_check = len(visited)
 
@@ -236,9 +243,10 @@ def main():
 
         else:
             ghost = False
-
+        #formatting issue
         if ghost == False:
-            answer = input("\nWhat direction do you want to go in? ")
+            answer = input("\nWhat do you want to do? You can move using a cardinal direction or up and down.\n "
+"You can look for items. Check inventory. Or quit.")
             answer = answer.upper()
 
         else:
@@ -252,20 +260,25 @@ def main():
 
             if next_room is None:
                 print("\nSomething tells you that you can't go that way.")
+                moved = False
 
             else:
                 current_room = next_room
+                moved = True
+
 
         if answer == "E" or answer == "EAST":
+            print()
+            print("\nYou went East.")
             next_room = room_list[current_room].east
 
             if next_room is None:
                 print("\nSomething tells you that you can't go that way.")
+                moved = False
 
             else:
-                print()
-                print("\nYou went East.")
                 current_room = next_room
+                moved = True
 
         if answer == "S" or answer == "SOUTH":
             print()
@@ -274,9 +287,11 @@ def main():
 
             if next_room is None:
                 print("\nSomething tells you that you can't go that way.")
+                moved = False
 
             else:
                 current_room = next_room
+                moved = True
 
         if answer == "W" or answer == "WEST":
             print()
@@ -285,9 +300,11 @@ def main():
 
             if next_room is None:
                 print("\nSomething tells you that you can't go that way.")
+                moved = False
 
             else:
                 current_room = next_room
+                moved = True
 
         if answer == "U" or answer == "UP":
             print()
@@ -296,9 +313,11 @@ def main():
 
             if next_room is None:
                 print("\nSomething tells you that you can't go that way.")
+                moved = False
 
             else:
                 current_room = next_room
+                moved = True
 
         if answer == "D" or answer == "DOWN":
             print()
@@ -307,12 +326,49 @@ def main():
 
             if next_room is None:
                 print("\nSomething tells you that you can't go that way.")
+                moved = False
 
             else:
                 current_room = next_room
+                moved = True
+
+        if answer == "LOOK":
+            moved = False
+            found = False
+            print()
+            print("You look around for anything of interest...")
+            for i in item_list:
+                if i.in_room == current_room:
+                    found = True
+                    print("FOUND: ",i.object_name.upper())
+                    print(i.description)
+                    print()
+                    inventory.append(i)
+            if found == False:
+                print("You find nothing.")
+
+        if answer == "I" or answer == "INVENTORY":
+            moved = False
+            print()
+            print("INVENTORY:")
+            for i in inventory:
+                print("• ", i.object_name)
+
+        if answer == "USE":
+            moved = False
+            print()
+            answer = input("Use what?")
+            answer = answer.upper()
+            if answer == "PHOTOGRAPH":
+                #work in progress
+                if current_room == 100:
+                    print("WWWWWWWWWWWWWWWW")
+                else:
+                    print("You can't use that here.")
 
 
         if answer == "Q" or answer == "QUIT":
+            moved = False
             print()
             answer = input("\nAre you sure you want to leave? You will be forever known as the scaredy-cat.")
             answer = answer.upper()
