@@ -243,9 +243,9 @@ def main():
 
         else:
             ghost = False
-        #formatting issue
+
         if ghost == False:
-            answer = input("\nWhat do you want to do? You can move using a cardinal direction or up and down.\n "
+            answer = input("\nWhat do you want to do? You can move using a cardinal direction \"east\" etc. or \"up\" and \"down\".\n "
 "You can look for items. Check inventory. Or quit.")
             answer = answer.upper()
 
@@ -359,13 +359,60 @@ def main():
             print()
             answer = input("Use what?")
             answer = answer.upper()
-            if answer == "PHOTOGRAPH":
+            if answer == "BALL":
                 #work in progress
-                if current_room == 100:
-                    print("WWWWWWWWWWWWWWWW")
+                if current_room == 10:
+                    print("You roll the ball between your feet in the children's bedroom. You accidentally kick it too far\n"
+                          "and it disappears into a dark corner. After a long moment, the ball reappears rolling back at you\n"
+                          "at an unusual angle. You never even heard the ball hit the wall.\n"
+                          "You hear some excited giggling coming from somewhere in the corner of the room.\n"
+                          "You feel a sense of happiness and thankfulness wash over you. You feel like you have done\n"
+                          "the right thing.")
                 else:
                     print("You can't use that here.")
 
+            if answer == "KEY":
+                if current_room == 12:
+                    print("You slide the key into the bronze lock on the old chest. Turning it gingerly, you hear a small\n"
+                          "click. The lid pops open and you lift it up to reveal some old papers, photographs, and a light\n"
+                          "coating of dust. You notice a lump in the corner underneath some faded newspaper. You, curious\n"
+                          "as ever, investigate the bump and find a pearl necklace. You can tell it is old but you can see\n"
+                          "your face gleaming in the cream colored pearls. A wash of pain and regret washes over you as you\n"
+                          "hold the necklace in your hands. You feel like you can do something with this necklace that will\n"
+                          "relieve some of this anguish. You take it with you.")
+                else:
+                    print("You can't use that here.")
+
+            if answer == "FOOD":
+                if current_room == 4:
+                    print("You place the food on the ground a few feet away from the ball. The rat that was guarding\n"
+                          "it excitedly breaks out into a run for the stinky morsel. Looks like you can get the ball now.")
+                else:
+                    print("You can't use that here.")
+
+            if answer == "SPATULA":
+                if current_room == 7:
+                    print("You slowly extend the spatula towards the spider guarding the shiny object. You want to close\n"
+                          "your eyes but you think it would probably be best to keep an eye on the enemy. With a little\n"
+                          "encouragement, the spider crawls onto the spatula and you put the whole thing in the tub and close\n"
+                          "the curtain. You tell yourself it is just because you are giving the spider privacy but it helps\n"
+                          "to have an extra barrier between you. You fish a key out of the sink. This could be useful.")
+                else:
+                    print("You can't use that here.")
+
+            if answer == "DOLL":
+                if current_room == 10:
+                    print(" You place the doll in the stroller. You feel a happy sensation overcome you. You hear joyous mumbling\n"
+                          "and you step back suddenly as the stroller moves slightly back and forth. You feel a small tug on your jeans\n"
+                          "and look down to see a little tea party hat fit for a lovely doll. You pick it up (probably against your\n"
+                          "better judgement) and place it on the head of the doll in the stroller. You feel lighter like you helped\n"
+                          "someone.")
+                else:
+                    print("You can't use that here.")
+
+            if answer == "NECKLACE":
+                if current_room == 6:
+                    print("You take the necklace out of your pocket. You feel like you should ")
 
         if answer == "Q" or answer == "QUIT":
             moved = False
