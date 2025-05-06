@@ -41,13 +41,11 @@ def main():
 
     item = Item("There is a table with some suspiciously fresh cheese on it. You feel your stomach rumble\n"
                 "involuntarily but you probably shouldn't eat it. Besides you have plenty of candy awaiting\n"
-                "you in the coming days.\n"
-                "Do you want to grab the cheese?", 5, "cheese")
+                "you in the coming days.\n", 5, "cheese")
     item_list.append(item)
 
     item = Item("You find a long thin spatula sitting alone in a jar on the rundown counter top. You think to\n"
-                "yourself that it might be useful if you come across anything you want to keep at a distance.\n"
-                "Do you want to grab the spatula?", 5, "spatula")
+                "yourself that it might be useful if you come across anything you want to keep at a distance.\n", 5, "spatula")
     item_list.append(item)
 
     item = Item("A beautiful doll sits at a small tea party set for three. You wonder if she knows\n"
@@ -75,7 +73,8 @@ def main():
                 "a little girl smiling sadly up at you holding in the hand not holding the elder child's, an antique doll with all her might. \n"
                 "You are a tad surprised the doll didn't break with how white the child's knuckles are. To her left is a small boy perhaps 6 years\n"
                 "of age. He confidently wears a much too small sailors suit. In his hand is a shiny red ball. With the mischief glinting\n"
-                "in his eyes, you have no doubt he and that ball caused many a ruckus.",1, "photograph")
+                "in his eyes, you have no doubt he and that ball caused many a ruckus. On the back side, three names are\n"
+                "written in neat cursive script \"April, Magnus, & Dottie Maxwell\".",1, "photograph")
     item_list.append(item)
 
 
@@ -84,16 +83,15 @@ def main():
                 "haunted Maxwell place. Eerie creaking sounds come from deep within the house.\n"
                 "Your friends stare at you from the safety of the sidewalk and gesture wildly\n"
                 "for you to go inside. You make a mental note to avoid playing truth or dare\n"
-                "the night before Halloween.\n"
-                "\nYou can go North into the house from here or quit and never hear the end of it.\n"
+                "the night before Halloween. Especially in a town with a haunted house.\n"
+                "\nYou can go North into the house from here.\n"
                 "What do you want to do? Input \"help\" if you want a list of action options.", 1, None, None, None, None, None)
     room_list.append(room)
 
 
     room = Room("You enter the dark foyer. You whip out your trusty flashlight you\n"
                 "affectionately call Ol' Betsy and look around. There is not much to see other\n"
-                "than cobwebs and a grand dusty mirror. There are stairs to the second floor\n"
-                "however they are damaged beyond repair. Guess you only have this floor to worry about!\n"
+                "than cobwebs and a grand dusty mirror.\n"
                 "\nThere is an ominous archway directly in front of you to the North.\n"
                 "You can also go back South.\n"
                 "What do you want to do? Input \"help\" if you want a list of action options.", 2, None,0, None, None, None)
@@ -140,7 +138,7 @@ def main():
     room = Room("You pass through the imposing door to find a small but stately bedroom.\n"
                 "A large four poster bed takes up most of the space. There is on old nightgown laid out on the bed waiting\n"
                 "to be worn. It looks fresh compared to everything else in the room.\n"
-                "You find an intricate jewelry box made of inlaid wood. The letters M A are carved into the top corner with a crude\n"
+                "You find an intricate jewelry box made of inlaid wood. The letters A M are carved into the top corner with a crude\n"
                 "but delicate hand. Inside, you find a few assortments of earrings, rings and the like but there seems to be an\n"
                 "empty space. You wonder what belonged here and why it was no longer in its comfortable velvet home.\n"
                 "\nYou can only go back West from here.\n"
@@ -243,18 +241,16 @@ def main():
             ghost = False
 
         if ghost_chance == 1 and room_list[current_room] != room_list[0]:
-            print("\nYou see a full-bodied apparition in the middle of the room. It wears a long\n"
-            "white dress. It seems unaware of your presence. You can try and engage it in conversation (c),\n"
-            ",quietly leave it to its affairs (l), or run away screaming and never come back (r).")
+            print("\nYou see a full-bodied apparition in the middle of the room. It seems unaware of your presence.\n"
+                "You can try and engage it in conversation \"c\",\n"
+                "quietly leave it to its affairs \"l\", or run away screaming and never come back \"r\".")
             ghost = True
 
         else:
             ghost = False
 
         if ghost == False:
-            answer = input("\nWhat do you want to do? You can move using a cardinal direction \"east\" etc. or \"up\" and \"down\".\n "
-                "You can \"look\" for items in your current room. Check \"inventory\". You can \"drop\" an item from your inventory.\n"
-                "You can ask for \"help\" to remind you of your action choices. Or you can \"quit\".")
+            answer = input("\nYou don't see anything particularly spooky.")
             answer = answer.upper()
 
         else:
@@ -423,7 +419,11 @@ def main():
 
             if answer == "NECKLACE":
                 if current_room == 6:
-                    print("You take the necklace out of your pocket. You feel like you should ")
+                    print("You take the necklace out of your pocket. You place it into the indented velvet within the jewelry box.\n"
+                          "You feel a lightening sensation and before you a ghostly young woman appears. \"Thank you\" she says.\n"
+                          "She moves to touch your hand still lingering over the necklace but as her translucent skin approaches\n"
+                          "your firm corporeal flesh, it disappears. You feel like you have immensely helped to ease a long-seated\n"
+                          "regret that has been stuck in this room.")
 
         if answer == "DROP":
             moved = False
@@ -433,7 +433,7 @@ def main():
             answer = answer.lower()
             for i in inventory:
                 if answer == i.object_name:
-                    print("Dropped", i.object_name.upper())
+                    print("You dropped", i.object_name.upper())
                     drop_success = True
                     inventory.remove(i)
                     for e in item_list:
@@ -496,8 +496,8 @@ def main():
             done = True
             win = True
 
-        elif room_list[current_room] == room_list[0] and visit_check < 8:
-            print("\nYou have not investigated every room of the house. If you quit now you will leave\n"
+        elif room_list[current_room] == room_list[0] and visit_check < 12:
+            print("\nYou sense you have more to investigate. If you stop now you will leave all of the\n"
                   "nooks and crannies shrouded in mystery.")
 
     if win == True:
