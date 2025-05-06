@@ -30,13 +30,6 @@ def main():
     item_list = []
 
 
-    item = Item("An old steamer chest sits in the corner. It has faded travel stickers from across the world dating\n"
-                "from what seems like throughout the 1800s. It has a big heavy brass lock keeping the veritable\n"
-                "time capsule treasure trove inside safe from the relentless wear of external years. You sense\n"
-                "there is something important inside. Maybe you should look for a matching key.", 12, "chest")
-    item_list.append(item)
-
-
     item = Item(" A red ball sits on the floor. It looks fun to play with but since there is a massive rat in the way,\n"
                 "you don't try to use it. Maybe you could reach it if you find something to distract the rat.", 4, "ball")
     item_list.append(item)
@@ -65,10 +58,6 @@ def main():
                 "feeling of deep longing sticks with you. You can't help but want to ease the pain.", 9, "doll")
     item_list.append(item)
 
-    item = Item(" A delicate pram sits by the foot of the pink bed. It seems sad such a beautiful pram should\n"
-                "not have a passenger. You wonder what you could do about it.", 10, "pram")
-    item_list.append(item)
-
     item = Item(" A gleaming pearl necklace catches your eye. You see a vision of an older woman clearly ill lying in a stately bed.\n"
                 "You see her slowly take the necklace off of her delicate pale neck. Her thin hands tremble as she folds it into the\n"
                 "hand of a young lady. You get a feeling that the old woman did not live for too long after this moment. You feel\n"
@@ -77,11 +66,6 @@ def main():
                 "necklace in the attic as she looks out the small window bitterly looking at her old friends and the life she could\n"
                 "have had. You feel the key was dropped somewhere dark and wet and regret loomed large after hiding away the necklace.\n"
                 " Maybe you could help ease the regret of an old rash decision made in a moment of anger and help these feelings move on.", 12, "necklace")
-    item_list.append(item)
-
-    item = Item("You find an intricate jewelry box made of inlaid wood. The letters M A are carved into the top corner with a crude\n"
-                "but delicate hand. Inside, you find a few assortments of earrings, rings and the like but there seems to be an\n"
-                "empty space. You wonder what belonged here and why it was no longer in its comfortable velvet home.", 6, "box")
     item_list.append(item)
 
     item = Item("You see a worn photograph sitting in a plain frame on a long sidetable. It shows three children. One, taller\n"
@@ -101,7 +85,8 @@ def main():
                 "Your friends stare at you from the safety of the sidewalk and gesture wildly\n"
                 "for you to go inside. You make a mental note to avoid playing truth or dare\n"
                 "the night before Halloween.\n"
-                "\nYou can go North into the house from here or quit and never hear the end of it.", 1, None, None, None, None, None)
+                "\nYou can go North into the house from here or quit and never hear the end of it.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", 1, None, None, None, None, None)
     room_list.append(room)
 
 
@@ -109,7 +94,9 @@ def main():
                 "affectionately call Ol' Betsy and look around. There is not much to see other\n"
                 "than cobwebs and a grand dusty mirror. There are stairs to the second floor\n"
                 "however they are damaged beyond repair. Guess you only have this floor to worry about!\n"
-                "\nThere is an ominous archway directly in front of you to the North. \nYou can also go back South.\n", 2, None,0, None, None, None)
+                "\nThere is an ominous archway directly in front of you to the North.\n"
+                "You can also go back South.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", 2, None,0, None, None, None)
     room_list.append(room)
 
 
@@ -119,7 +106,8 @@ def main():
                 "\nThere is an archway to the West. \n"
                 "There is a dark door to the East. \n"
                 "The hallway continues to the North.\n"
-                "You can return South.", 3, 7, 1, 4, 8, None)
+                "You can return South.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", 3, 7, 1, 4, 8, None)
     room_list.append(room)
 
 
@@ -129,34 +117,42 @@ def main():
                 "heavy black curtains. \n"
                 "\nThere is an archway to the West. \n"
                 "There is an imposing door to the East.\n"
-                "You can return South.", None, 6, 2, 5, None, None)
+                "You can return South.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, 6, 2, 5, None, None)
     room_list.append(room)
 
 
     room = Room("You pass through the archway to find a room with furniture covered in what were \n"
                 "once white cloths now gray with a thick layer of dust. It seems even the furniture here \n"
-                "is ghostly. \nThere is nowhere to go from here except back East.", None, 2, None, None, None, None)
+                "is ghostly. \nThere is nowhere to go from here except back East.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, 2, None, None, None, None)
     room_list.append(room)
 
 
     room = Room("You pass through the archway. A pungent smell of decay emanates from the ice-chest. \n"
                 "There are some other things like an old stove and a few half opened cabinets. \n"
                 "\nYou can go back East.\n"
-                "You can go down to the basement.", None, 3, None,None, None, 8)
+                "You can go down to the basement.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, 3, None,None, None, 8)
     room_list.append(room)
 
 
     room = Room("You pass through the imposing door to find a small but stately bedroom.\n"
                 "A large four poster bed takes up most of the space. There is on old nightgown laid out on the bed waiting\n"
                 "to be worn. It looks fresh compared to everything else in the room.\n"
-                "\nYou can only go back West from here.", None, None, None,3, None, None)
+                "You find an intricate jewelry box made of inlaid wood. The letters M A are carved into the top corner with a crude\n"
+                "but delicate hand. Inside, you find a few assortments of earrings, rings and the like but there seems to be an\n"
+                "empty space. You wonder what belonged here and why it was no longer in its comfortable velvet home.\n"
+                "\nYou can only go back West from here.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, None, None,3, None, None)
     room_list.append(room)
 
 
     room = Room("You go through the dark door to a dingy bathroom. You think to yourself how lucky \n"
                 "Ol' Betsy is to not have a sense of smell. You catch a glimpse of yourself in the mirror and \n"
                 "swear you see someone behind you. A large spider sits in the broken porcelain sink.\n"
-                "\nYou can only go West from here.", None, None, None, 2, None, None)
+                "You can only go West from here.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, None, None, 2, None, None)
     room_list.append(room)
 
 
@@ -165,7 +161,8 @@ def main():
                 "all the way up to your hip.\n"
                 "You can go back upstairs to the south hall.\n"
                 "You can venture through an archway to the East.\n"
-                "You can walk through the archway to the South.", None, 9, 10, None, 2, None)
+                "You can walk through the archway to the South.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, 9, 10, None, 2, None)
     room_list.append(room)
 
 
@@ -173,7 +170,8 @@ def main():
                 "There are boxes and toys strewn about in large piles. There seems to be some method to the madness\n"
                 "although not one you can easily discern. It almost seems like things were in the process of being sorted but\n"
                 "the organizing party took a break for lunch and never came back.\n"
-                "You can only go back West from here.", None, None, None, 8, None, None)
+                "You can only go back West from here.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, None, None, 8, None, None)
     room_list.append(room)
 
 
@@ -182,15 +180,19 @@ def main():
                 "a blue bedspread and was covered in model airplanes and various sports balls. Most of the room\n"
                 "was taken up by the beds and the twin desks across from the door. Beautiful drawings covered both desks\n"
                 "even falling to the floor in their avalanche of progress.\n"
+                "A delicate pram sits by the foot of the pink bed. It seems sad such a beautiful pram should\n"
+                "not have a passenger. You wonder what you could do about it."
                 "You can go back North to the stairwell.\n"
-                "You can go East through a small door between the two beds.", 8, 11, None, None, None, None)
+                "You can go East through a small door between the two beds.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", 8, 11, None, None, None, None)
     room_list.append(room)
 
 
     room = Room("A large rusty furnace takes up almost the entirety of the small room. For looking like it has not been used in\n"
                 "decades, the room is as warm as if it were functioning on full power. You wonder how this could be as the\n"
-                "rest of the house is cold with some small pockets seeming almost freezing.\n"
-                "The only way you can go from here is back West.", 10, None, None, None, None, None)
+                "rest of the house is cold with some occasional pockets that could be described as freezing.\n"
+                "The only way you can go from here is back West.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, None, None, 10, None, None)
     room_list.append(room)
 
 
@@ -198,7 +200,12 @@ def main():
                 "things you can only describe as being 'attic-y' like old boxes, a dress form, a manikin head.\n"
                 "You ponder quietly to yourself about why manikin heads always seem to turn up in creepy\n"
                 "old attics where they don't belong.\n"
-                "You cna only go back down from here.", None, None, None, None, None, 5)
+                "An old steamer chest sits in the corner. It has faded travel stickers\n"
+                "from across the world dating from what seems like throughout the 1800s. It has a big heavy brass lock keeping\n "
+                "the veritable time capsule treasure trove inside safe from the relentless wear of external years. You sense\n"
+                "there is something important inside. Maybe you should look for a matching key.\n"
+                "The only way you can move from here is back down.\n"
+                "What do you want to do? Input \"help\" if you want a list of action options.", None, None, None, None, None, 5)
     room_list.append(room)
 
 
@@ -246,7 +253,8 @@ def main():
 
         if ghost == False:
             answer = input("\nWhat do you want to do? You can move using a cardinal direction \"east\" etc. or \"up\" and \"down\".\n "
-"You can look for items. Check inventory. Or quit.")
+                "You can \"look\" for items in your current room. Check \"inventory\". You can \"drop\" an item from your inventory.\n"
+                "You can ask for \"help\" to remind you of your action choices. Or you can \"quit\".")
             answer = answer.upper()
 
         else:
@@ -342,6 +350,8 @@ def main():
                     found = True
                     print("FOUND: ",i.object_name.upper())
                     print(i.description)
+                    #makes it so when you pick it up it goes away to a room that doesn't exist
+                    i.in_room = 100
                     print()
                     inventory.append(i)
             if found == False:
@@ -359,6 +369,7 @@ def main():
             print()
             answer = input("Use what?")
             answer = answer.upper()
+
             if answer == "BALL":
                 #work in progress
                 if current_room == 10:
@@ -413,6 +424,44 @@ def main():
             if answer == "NECKLACE":
                 if current_room == 6:
                     print("You take the necklace out of your pocket. You feel like you should ")
+
+        if answer == "DROP":
+            moved = False
+            drop_success = False
+            print()
+            answer = input("Drop what?")
+            answer = answer.lower()
+            for i in inventory:
+                if answer == i.object_name:
+                    print("Dropped", i.object_name.upper())
+                    drop_success = True
+                    inventory.remove(i)
+                    for e in item_list:
+                        if answer == e.object_name:
+                            e.in_room = current_room
+            if drop_success == False:
+                print("Invalid Item")
+
+        if answer == "HELP" or answer == "H":
+            print("""
+        ===========HELP  MENU===========
+        HELP  or H - Open help menu
+        --------------------------------
+        NORTH or N - Go north
+        EAST  or E - Go east
+        SOUTH or S - Go south
+        WEST  or W - Go west
+        UP    or U - Go up
+        DOWN  or D - Go down
+        --------------------------------
+        LOOK       - Search for items
+        INVENTORY  - Open your inventory
+        DROP       - Drop an item
+        USE        - Use an item
+        --------------------------------
+        QUIT  or Q - Quit the game
+        ================================
+        """)
 
         if answer == "Q" or answer == "QUIT":
             moved = False
