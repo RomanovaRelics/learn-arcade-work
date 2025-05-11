@@ -353,7 +353,7 @@ def main():
             print("You look around for anything of interest...")
             for i in item_list:
                 if i.in_room == current_room:
-                    if item != "ball" or "key":
+                    if item != "ball" or "key" or "necklace":
                         found = True
                     print("FOUND: ",i.object_name.upper())
                     print(i.description)
@@ -362,14 +362,21 @@ def main():
                     print()
                     inventory.append(i)
                     if item == "ball":
-                        ###check inventory to see if you have food, check if food has been used, then found is True
+                        ###check if food has been used, then found is True
                         print("FOUND: ",i.object_name.upper())
                         print(i.description)
                         i.in_room = 100
                         print()
                         inventory.append(i)
                     if item == "key":
-                        ###check inventory list to see if you have spatula, use spatula, then found is True
+                        ###check used spatula, then found is True
+                        print("FOUND: ",i.object_name.upper())
+                        print(i.description)
+                        i.in_room = 100
+                        print()
+                        inventory.append(i)
+                    if item == "necklace":
+                        ###check if you have used key, then found is true
                         print("FOUND: ",i.object_name.upper())
                         print(i.description)
                         i.in_room = 100
