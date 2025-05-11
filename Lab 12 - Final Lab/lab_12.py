@@ -66,17 +66,6 @@ def main():
                 " Maybe you could help ease the regret of an old rash decision made in a moment of anger and help these feelings move on.", 12, "necklace")
     item_list.append(item)
 
-    item = Item("You see a worn photograph sitting in a plain frame on a long sidetable. It shows three children. One, taller\n"
-                "than the others with dark brown hair. She looks old beyond her years like a child forced to grow up too soon.\n"
-                "She wears a plain blue dress but what stands out the most is a simple but elegant string of pearls around her neck.\n"
-                "She looks conflicted about wearing it as one hand gently reaches to touch them. You follow her other arm down to see\n"
-                "a little girl smiling sadly up at you holding in the hand not holding the elder child's, an antique doll with all her might. \n"
-                "You are a tad surprised the doll didn't break with how white the child's knuckles are. To her left is a small boy perhaps 6 years\n"
-                "of age. He confidently wears a much too small sailors suit. In his hand is a shiny red ball. With the mischief glinting\n"
-                "in his eyes, you have no doubt he and that ball caused many a ruckus. On the back side, three names are\n"
-                "written in neat cursive script \"April, Magnus, & Dottie Maxwell\".",1, "photograph")
-    item_list.append(item)
-
 
 
     room = Room("You find yourself standing on the sagging porch of the notoriously\n"
@@ -92,6 +81,15 @@ def main():
     room = Room("You enter the dark foyer. You whip out your trusty flashlight you\n"
                 "affectionately call Ol' Betsy and look around. There is not much to see other\n"
                 "than cobwebs and a grand dusty mirror.\n"
+                "\nYou see a worn photograph sitting in a plain frame on a long sidetable. It shows three children. One, taller\n"
+                "than the others with dark brown hair. She looks old beyond her years like a child forced to grow up too soon.\n"
+                "She wears a plain blue dress but what stands out the most is a simple but elegant string of pearls around her neck.\n"
+                "She looks conflicted about wearing it as one hand gently reaches to touch them. You follow her other arm down to see\n"
+                "a little girl smiling sadly up at you holding in the hand not holding the elder child's, an antique doll with all her might. \n"
+                "You are a tad surprised the doll didn't break with how white the child's knuckles are. To her left is a small boy perhaps 6 years\n"
+                "of age. He confidently wears a much too small sailors suit. In his hand is a shiny red ball. With the mischief glinting\n"
+                "in his eyes, you have no doubt he and that ball caused many a ruckus. On the back side, three names are\n"
+                "written in neat cursive script \"April, Magnus, & Dottie Maxwell\"\n"
                 "\nThere is an ominous archway directly in front of you to the North.\n"
                 "You can also go back South.\n"
                 "What do you want to do? Input \"help\" if you want a list of action options.", 2, None,0, None, None, None)
@@ -212,6 +210,7 @@ def main():
     done = False
     ghost = False
     win = False
+    chill = False
 
     moved = True
     found = False
@@ -239,6 +238,17 @@ def main():
         else:
             ghost_chance = 10
             ghost = False
+
+        if chill == False:
+            chill_chance = random.randint(1,10)
+        else:
+            chill_chance = 10
+            chill = False
+
+        if chill_chance == 1 and room_list[current_room] != room_list[0] and ghost is False:
+            print("You feel a freezing chill crawl up your spine that sets off goosebumps down your arms. It vanishes\n"
+                  "as quickly as it appears. Almost like it was just passing through you as it casually moved about the\n"
+                  "house.")
 
         if ghost_chance == 1 and room_list[current_room] != room_list[0]:
             print("\nYou see a full-bodied apparition in the middle of the room. It seems unaware of your presence.\n"
@@ -343,13 +353,29 @@ def main():
             print("You look around for anything of interest...")
             for i in item_list:
                 if i.in_room == current_room:
-                    found = True
+                    if item != "ball" or "key":
+                        found = True
                     print("FOUND: ",i.object_name.upper())
                     print(i.description)
                     #makes it so when you pick it up it goes away to a room that doesn't exist
                     i.in_room = 100
                     print()
                     inventory.append(i)
+                    if item == "ball":
+                        ###check inventory to see if you have food, check if food has been used, then found is True
+                        print("FOUND: ",i.object_name.upper())
+                        print(i.description)
+                        i.in_room = 100
+                        print()
+                        inventory.append(i)
+                    if item == "key":
+                        ###check inventory list to see if you have spatula, use spatula, then found is True
+                        print("FOUND: ",i.object_name.upper())
+                        print(i.description)
+                        i.in_room = 100
+                        print()
+                        inventory.append(i)
+
             if found == False:
                 print("You find nothing.")
 
@@ -367,7 +393,6 @@ def main():
             answer = answer.upper()
 
             if answer == "BALL":
-                #work in progress
                 if current_room == 10:
                     print("You roll the ball between your feet in the children's bedroom. You accidentally kick it too far\n"
                           "and it disappears into a dark corner. After a long moment, the ball reappears rolling back at you\n"
@@ -424,6 +449,8 @@ def main():
                           "She moves to touch your hand still lingering over the necklace but as her translucent skin approaches\n"
                           "your firm corporeal flesh, it disappears. You feel like you have immensely helped to ease a long-seated\n"
                           "regret that has been stuck in this room.")
+            else:
+                print("That doesn't work.")
 
         if answer == "DROP":
             moved = False
@@ -443,6 +470,7 @@ def main():
                 print("Invalid Item")
 
         if answer == "HELP" or answer == "H":
+            moved = False
             print("""
         ===========HELP  MENU===========
         HELP  or H - Open help menu
@@ -470,6 +498,7 @@ def main():
             answer = answer.upper()
 
             if answer == "Y" or answer == "YES":
+                moved = False
                 done = True
                 win = False
 
@@ -477,6 +506,7 @@ def main():
                 done = False
 
         if answer == "C" and ghost == True:
+            moved = False
             print()
             print("\nYou talk to the ghost. It turns to look at you before vanishing.")
 
@@ -487,6 +517,7 @@ def main():
             win = False
 
         elif ghost == True:
+            moved = False
             print()
             print("\nYou decide you are not being paid enough to deal with an ACTUAL ghost. Come to think of it, you\n"
                   "aren't getting paid at all... Maybe truth or dare needs to up its stakes and maybe you should just\n"
