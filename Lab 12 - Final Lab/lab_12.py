@@ -1,7 +1,6 @@
 ###LAB 12###
 
 import random
-import os
 
 
 class Room:
@@ -128,7 +127,9 @@ def main():
 
     room = Room("You pass through the archway to find a room with furniture covered in what were \n"
                 "once white cloths now gray with a thick layer of dust. It seems even the furniture here \n"
-                "is ghostly. \nThere is nowhere to go from here except back East.\n"
+                "is ghostly. You see a shiny red ball on the floor in the far corner of the room. Too bad a rat is\n"
+                "guarding it. Looks like fun. maybe you could get it to move with enough motivation?"
+                "\nThere is nowhere to go from here except back East.\n"
                 "What do you want to do? Input \"help\" if you want a list of action options.", None, 2, None, None,
                 None, None)
     room_list.append(room)
@@ -155,6 +156,8 @@ def main():
     room = Room("You go through the dark door to a dingy bathroom. You think to yourself how lucky \n"
                 "Ol' Betsy is to not have a sense of smell. You catch a glimpse of yourself in the mirror and \n"
                 "swear you see someone behind you. A large spider sits in the broken porcelain sink.\n"
+                "Something glints in the drain just under the spider. You will need something to move the spider to get\n"
+                "at that shiny thing.\n"
                 "You can only go West from here.\n"
                 "What do you want to do? Input \"help\" if you want a list of action options.", None, None, None, 2,
                 None, None)
@@ -214,8 +217,6 @@ def main():
                 None, 5)
     room_list.append(room)
 
-    current_room = 0
-
     done = False
     ghost = False
     chill = False
@@ -224,11 +225,17 @@ def main():
     moved = True
     found = False
 
+    current_room = 0
+
     inventory = []
 
     used_food = "False\n"
     used_spatula = "False\n"
     used_key = "False\n"
+
+    ball_complete = "False\n"
+    doll_complete = "False\n"
+    necklace_complete = "False\n"
 
     ######## this code checks a save file exists, if it doesn't it creates a new one
     print("VALIDATING SAVE FILE")
@@ -238,16 +245,24 @@ def main():
     except:
         save_file = open("save_file.txt", "w")
         print("NO SAVE FILE FOUND - CREATING NEW SAVE.")
-        save_file.writelines([str(current_room) + "\n", str(inventory) + "\n", used_food, used_spatula, used_key])
+        save_file.writelines(
+            [str(current_room) + "\n", str(inventory) + "\n", used_food, used_spatula, used_key, ball_complete,
+             doll_complete, necklace_complete])
         save_file.close()
         save_file = open("save_file.txt", "r")
 
     file_content = save_file.readlines()
     current_room = int(file_content[0])
     inventory = eval(file_content[1])
+
     used_food = file_content[2]
     used_spatula = file_content[3]
     used_key = file_content[4]
+
+    ball_complete = file_content[5]
+    doll_complete = file_content[6]
+    necklace_complete = file_content[7]
+
     save_file.close()
     ########
 
@@ -419,7 +434,8 @@ def main():
                         print()
                         inventory.append(i.object_name)
             if found == False:
-                print("You find nothing.")
+                print("You find nothing or you do have not used the right materials to obtain an object.\n"
+                      "Try picking up every item you can first.")
 
         if answer == "I" or answer == "INVENTORY":
             ghost = True
@@ -448,6 +464,7 @@ def main():
                         "You hear some excited giggling coming from somewhere in the corner of the room.\n"
                         "You feel a sense of happiness and thankfulness wash over you. You feel like you have done\n"
                         "the right thing.")
+                    ball_complete = "True\n"
                 else:
                     print("You can't use that here.")
 
@@ -493,6 +510,7 @@ def main():
                         "and look down to see a little tea party hat fit for a lovely doll. You pick it up (probably against your\n"
                         "better judgement) and place it on the head of the doll in the stroller. You feel lighter like you helped\n"
                         "someone.")
+                    doll_complete = "True\n"
                 else:
                     print("You can't use that here.")
 
@@ -504,6 +522,7 @@ def main():
                         "She moves to touch your hand still lingering over the necklace but as her translucent skin approaches\n"
                         "your firm corporeal flesh, it disappears. You feel like you have immensely helped to ease a long-seated\n"
                         "regret that has been stuck in this room.")
+                    necklace_complete = "True\n"
 
         if answer == "DROP":
             ghost = True
@@ -532,6 +551,7 @@ def main():
         =============HELP  MENU=============
         HELP  or H     - Open help menu
         --------------------------------
+----
         NORTH or N     - Go north
         EAST  or E     - Go east
         SOUTH or S     - Go south
@@ -539,13 +559,21 @@ def main():
         UP    or U     - Go up
         DOWN  or D     - Go down
         --------------------------------
+----
         LOOK           - Search for items
         INVENTORY or I - Open your inventory
         DROP           - Drop an item
         USE            - Use an item
         --------------------------------
+----
         SAVE           - Save the game
         QUIT           - Quit the game
+        RESTART        - Restart the game
+        --------------------------------
+----
+        TALK or T      - Talk to ghost
+        LEAVE or L     - Leave the ghost alone
+        RUN or R       - Run away from the ghost
         ====================================
         """)
 
@@ -557,7 +585,8 @@ def main():
             try:
                 save_file = open("save_file.txt", "w")
                 save_file.writelines(
-                    [str(current_room) + "\n", str(inventory) + "\n", used_food, used_spatula, used_key])
+                    [str(current_room) + "\n", str(inventory) + "\n", used_food, used_spatula, used_key, ball_complete,
+                     doll_complete, necklace_complete])
                 save_file.close()
                 print("SUCCESSFULLY SAVED")
             except:
@@ -573,14 +602,30 @@ def main():
 
             if answer == "Y" or answer == "YES":
                 try:
-                    os.remove("save_file.txt")
+                    current_room = 0
+
+                    inventory = []
+
+                    used_food = "False\n"
+                    used_spatula = "False\n"
+                    used_key = "False\n"
+
+                    ball_complete = "False\n"
+                    doll_complete = "False\n"
+                    necklace_complete = "False\n"
+
+                    save_file = open("save_file.txt", "w")
+                    save_file.writelines(
+                        [str(current_room) + "\n", str(inventory) + "\n", used_food, used_spatula, used_key,
+                         ball_complete, doll_complete, necklace_complete])
+                    save_file.close()
+
                     print("SAVE FILE SUCCESSFULLY DELETED")
                     print("Please Restart The Game.")
                 except:
                     print("NO SAVE FILE EXISTS")
                 done = True
                 win = False
-        ########
 
         if answer == "QUIT":
             ghost = True
@@ -598,45 +643,47 @@ def main():
             else:
                 done = False
 
-        if answer == "C" and ghost == True:
+        if answer == "T" or "TALK" and ghost == True:
             print()
             print("\nYou talk to the ghost. It turns to look at you before vanishing.")
 
-        elif answer == "R" and ghost == True:
+        elif answer == "R" or "RUN" and ghost == True:
             print()
             print("\nYou run away.")
             done = True
             win = False
 
-        elif answer == "L" and ghost == True:
+        elif answer == "L" or "LEAVE" and ghost == True:
             print()
             print("\nYou decide you are not being paid enough to deal with an ACTUAL ghost. Come to think of it, you\n"
                   "aren't getting paid at all... Maybe truth or dare needs to up its stakes and maybe you should just\n"
                   "pretend you don't see it.")
 
-        if room_list[current_room] == room_list[0] and visit_check >= 8:
-            done = True
-            win = True
-
-        elif room_list[current_room] == room_list[0] and visit_check < 12:
-            print("\nYou sense you have more to investigate. If you stop now you will leave all of the\n"
-                  "nooks and crannies shrouded in mystery.")
+        if room_list[current_room] == room_list[0]:
+            if ball_complete == "True\n" and doll_complete == "True\n" and necklace_complete == "True\n":
+                done = True
+                win = True
+            else:
+                if done == False:
+                    print("\nYou sense you have more to investigate. If you stop now you will leave all of the\n"
+                          "nooks and crannies shrouded in mystery.")
 
     if win == True:
         print()
-        print("\nYou managed to survive exploring the old Maxwell place. Your friends will\n"
-              "always remember your bravery. \" Don't forget I helped too.\" you hear coming from\n"
+        print("\nYou managed to survive exploring the old Maxwell place and put the spirits of April, Magnus and Dottie to rest.\n "
+              "Your friends will always remember your bravery. \" Don't forget I helped too!\" you hear coming from\n"
               "Ol' Betsy. Maybe you should get that checked out. Your friends chant your name\n"
-              "and sing your praises as you saunter away from the decrepit house.")
+              "and sing your praises. Before you walk away from the decrepit, now empty, house, you hear a faint\n"
+              "chorus of three thank yous. You cannot help but smile to yourself.")
 
-    # else:
-    # print("\nYou run outside screaming and your friends point and laugh. You will\n"
-    # "NEVER live this down. You get used to the verbal and physical pokes\n"
-    # "from your friends as you all walk down the road. At least Ol' Betsy\n"
-    # "understands. \"Wimp\" you hear quietly from your palm. You look around\n"
-    # "guess no-one else heard that. Maybe you ARE a scaredy-cat. All you know is\n"
-    # "you never want to go to the Old Maxwell place again... And maybe you should get Ol'\n"
-    # "Betsy checked for spirits.")
+    else:
+        print("\nYou decide to take a leave for now. You will\n"
+            "NEVER live this down. You get used to the verbal and physical pokes\n"
+            "from your friends as you all walk down the road. At least Ol' Betsy\n"
+            "understands. \"Wimp\" you hear quietly from your palm. You look around\n"
+            "guess no-one else heard that. Maybe you ARE a scaredy-cat. All you know is\n"
+            "you feel something calling you to go to the Old Maxwell place again... And maybe you should get Ol'\n"
+            "Betsy checked for spirits.")
 
 
 main()
